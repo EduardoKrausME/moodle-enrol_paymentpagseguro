@@ -1,0 +1,40 @@
+language: php
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+php:
+  - 7.1
+
+env:
+  - DB=pgsql  MOODLE_BRANCH=MOODLE_34_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
+
+matrix:
+  include:
+    - php: 7.1
+      env: DB=pgsql  MOODLE_BRANCH=MOODLE_34_STABLE
+    - php: 7.1
+      env: DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
+
+before_install:
+  - phpenv config-rm xdebug.ini
+  - cd ../..
+  - composer selfupdate
+  - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^1
+  - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
+
+install:
+  - moodle-plugin-ci install
+
+ignore:
+  - classes/*
+
+script:
+  - moodle-plugin-ci phplint
+  - moodle-plugin-ci phpmd
+  - moodle-plugin-ci behat
+  - moodle-plugin-ci codechecker || true
