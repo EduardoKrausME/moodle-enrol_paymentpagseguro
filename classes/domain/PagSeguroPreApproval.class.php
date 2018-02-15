@@ -1,80 +1,98 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    André da Silva Medeiros <andre@swdesign.net.br>
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Class PagSeguroPreApproval
  * Represents a PagSeguro preApproval transaction
  *
  * @property    PagSeguroSender $sender
  *
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroPreApproval {
-    /***
+    /**
      * Transaction name
      */
     private $name;
 
-    /***
+    /**
      * Transaction date
      */
     private $date;
 
-    /***
+    /**
      * Last event date
      * Date the last notification about this transaction was sent
      */
     private $lastEventDate;
 
-    /***
+    /**
      * Transaction code
      */
     private $code;
 
-    /***
+    /**
      *  Reference code
      *  You can use the reference code to store an identifier so you can
      *  associate the PagSeguro transaction to a transaction in your system.
      */
     private $reference;
 
-    /***
+    /**
      * Recovery code
      */
     private $tracker;
 
-    /***
+    /**
      * Transaction Status
      * @see PagSeguroTransactionStatus
      * @var PagSeguroTransactionStatus
      */
     private $status;
 
-    /***
+    /**
      * Pre Approval Charge
      */
     private $charge;
 
-    /***
+    /**
      * Payer information, who is sending money
      * @see PagSeguroSender
      * @var PagSeguroSender
@@ -94,14 +112,14 @@ class PagSeguroPreApproval {
         }
     }
 
-    /***
+    /**
      * @return String the transaction name
      */
     public function getName() {
         return $this->name;
     }
 
-    /***
+    /**
      * Sets the transaction name
      *
      * @param string name
@@ -110,7 +128,7 @@ class PagSeguroPreApproval {
         $this->name = $name;
     }
 
-    /***
+    /**
      * Date the last notification about this transaction was sent
      * @return datetime the last event date
      */
@@ -118,7 +136,7 @@ class PagSeguroPreApproval {
         return $this->lastEventDate;
     }
 
-    /***
+    /**
      * Sets the last event date
      *
      * @param lastEventDate
@@ -127,14 +145,14 @@ class PagSeguroPreApproval {
         $this->lastEventDate = $lastEventDate;
     }
 
-    /***
+    /**
      * @return datetime the transaction date
      */
     public function getDate() {
         return $this->date;
     }
 
-    /***
+    /**
      * Sets the transaction date
      *
      * @param string date
@@ -143,14 +161,14 @@ class PagSeguroPreApproval {
         $this->date = $date;
     }
 
-    /***
+    /**
      * @return string the transaction code
      */
     public function getCode() {
         return $this->code;
     }
 
-    /***
+    /**
      * Sets the transaction code
      *
      * @param code
@@ -159,7 +177,7 @@ class PagSeguroPreApproval {
         $this->code = $code;
     }
 
-    /***
+    /**
      * You can use the reference code to store an identifier so you can
      *  associate the PagSeguro transaction to a transaction in your system.
      *
@@ -169,7 +187,7 @@ class PagSeguroPreApproval {
         return $this->reference;
     }
 
-    /***
+    /**
      * Sets the reference code
      *
      * @param reference
@@ -178,14 +196,14 @@ class PagSeguroPreApproval {
         $this->reference = $reference;
     }
 
-    /***
+    /**
      * @return string the tracker code
      */
     public function getTracker() {
         return $this->tracker;
     }
 
-    /***
+    /**
      * Sets the tracker code
      *
      * @param code
@@ -194,14 +212,14 @@ class PagSeguroPreApproval {
         $this->tracker = $tracker;
     }
 
-    /***
+    /**
      * @return string the charge
      */
     public function getCharge() {
         return $this->charge;
     }
 
-    /***
+    /**
      * Sets the charge
      *
      * @param code
@@ -210,7 +228,7 @@ class PagSeguroPreApproval {
         $this->charge = $charge;
     }
 
-    /***
+    /**
      * @return PagSeguroPreApprovalStatus the transaction status
      * @see PagSeguroPreApprovalStatus
      */
@@ -218,7 +236,7 @@ class PagSeguroPreApproval {
         return $this->status;
     }
 
-    /***
+    /**
      * Sets the preApproval status
      * @param PagSeguroPreApprovalStatus $status
      */
@@ -226,8 +244,7 @@ class PagSeguroPreApproval {
         $this->status = $status;
     }
 
-
-    /***
+    /**
      * @return PagSeguroSender the sender information, who is sending money in this transaction
      * @see PagSeguroSender
      */
@@ -235,7 +252,7 @@ class PagSeguroPreApproval {
         return $this->sender;
     }
 
-    /***
+    /**
      * Sets the sender information, who is sending money in this transaction
      * @param PagSeguroSender $sender
      */
@@ -243,7 +260,7 @@ class PagSeguroPreApproval {
         $this->sender = $sender;
     }
 
-    /***
+    /**
      * @return String a string that represents the current object
      */
     public function toString() {

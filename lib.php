@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Plugin lib file.
+ *
  * @package    enrol_paymentpagseguro
  * @copyright  2018 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -177,12 +179,12 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
                         <p><img width=\"300\" alt=\"pagseguro\"
                                 src=\"{$CFG->wwwroot}/enrol/paymentpagseguro/pix/paymentpagseguro-logo.png\"/></p>
                         <p>&nbsp;</p>
-                        <p><a href=\"{$CFG->wwwroot}/enrol/paymentpagseguro/pagar.php?id={$instance->courseid}\" 
+                        <p><a href=\"{$CFG->wwwroot}/enrol/paymentpagseguro/pagar.php?id={$instance->courseid}\"
                               style=\"border-radius:15px;box-shadow:0 1px 3px #666666;color:#ffffff;font-size:20px;
                                       background:#4DB082;padding:10px 20px;text-decoration:none;\">
                                   Pagar agora com PagSeguro</a></p>
                         <p>&nbsp;</p>
-                        <p>&nbsp;</p>  
+                        <p>&nbsp;</p>
                     </div>";
             }
 

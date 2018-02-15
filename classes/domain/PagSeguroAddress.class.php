@@ -1,71 +1,89 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    PagSeguro Internet Ltda.
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Represents an address location, typically for shipping or charging purposes.
  * @see PagSeguroShipping
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroAddress {
 
     private $postalCode;
 
-    /***
+    /**
      * Street name
      */
     private $street;
 
-    /***
+    /**
      * Number
      */
     private $number;
 
-    /***
+    /**
      * Apartment, suite number or any other qualifier after the street/number pair.
      * Example: Apt 274, building A.
      */
     private $complement;
 
-    /***
+    /**
      * District, county or neighborhood, if applicable
      */
     private $district;
 
-    /***
+    /**
      * City
      */
     private $city;
 
-    /***
+    /**
      * State or province
      */
     private $state;
 
-    /***
+    /**
      * Country
      */
     private $country;
 
-    /***
+    /**
      * acronyms and states brazilian
      * @var type
      */
@@ -101,7 +119,7 @@ class PagSeguroAddress {
         'tocantins' => 'TO',
         'distritofederal' => 'DF');
 
-    /***
+    /**
      * Initializes a new instance of the Address class
      * @param array $data
      */
@@ -132,63 +150,63 @@ class PagSeguroAddress {
         }
     }
 
-    /***
+    /**
      * @return string the street
      */
     public function getStreet() {
         return $this->street;
     }
 
-    /***
+    /**
      * @return string the number
      */
     public function getNumber() {
         return $this->number;
     }
 
-    /***
+    /**
      * @return string the complement
      */
     public function getComplement() {
         return $this->complement;
     }
 
-    /***
+    /**
      * @return string the distrcit
      */
     public function getDistrict() {
         return $this->district;
     }
 
-    /***
+    /**
      * @return string the city
      */
     public function getCity() {
         return $this->city;
     }
 
-    /***
+    /**
      * @return string the state
      */
     public function getState() {
         return $this->state;
     }
 
-    /***
+    /**
      * @return string the postal code
      */
     public function getPostalCode() {
         return $this->postalCode;
     }
 
-    /***
+    /**
      * @return string the country
      */
     public function getCountry() {
         return $this->country;
     }
 
-    /***
+    /**
      * Sets the country
      * @param String $country
      */
@@ -196,7 +214,7 @@ class PagSeguroAddress {
         $this->country = $country;
     }
 
-    /***
+    /**
      * Sets the street
      * @param String $street
      */
@@ -204,7 +222,7 @@ class PagSeguroAddress {
         $this->street = $street;
     }
 
-    /***
+    /**
      * sets the numbetr
      * @param String $number
      */
@@ -212,7 +230,7 @@ class PagSeguroAddress {
         $this->number = $number;
     }
 
-    /***
+    /**
      * Sets the complement
      * @param String $complement
      */
@@ -220,7 +238,7 @@ class PagSeguroAddress {
         $this->complement = $complement;
     }
 
-    /***
+    /**
      * sets the district
      * @param String $district
      */
@@ -228,7 +246,7 @@ class PagSeguroAddress {
         $this->district = $district;
     }
 
-    /***
+    /**
      * Sets the city
      * @param String $city
      */
@@ -236,7 +254,7 @@ class PagSeguroAddress {
         $this->city = $city;
     }
 
-    /***
+    /**
      * Sets the state
      * @param String $state
      */
@@ -244,7 +262,7 @@ class PagSeguroAddress {
         $this->state = $this->treatState($state);
     }
 
-    /***
+    /**
      * Sets the postal code
      * @param String $postalCode
      */
@@ -252,7 +270,7 @@ class PagSeguroAddress {
         $this->postalCode = $postalCode;
     }
 
-    /***
+    /**
      * Handle the state to pass in format expected in PagSeguro
      * @param type $defaultState
      * @return string
@@ -271,14 +289,12 @@ class PagSeguroAddress {
         $state = utf8_decode($defaultState);
         $state = strtolower($state);
 
-        // Code ASCII of the vowel
         $ascii['a'] = range(224, 230);
         $ascii['e'] = range(232, 235);
         $ascii['i'] = range(236, 239);
         $ascii['o'] = array_merge(range(242, 246), array(240, 248));
         $ascii['u'] = range(249, 252);
 
-        // Code ASCII of the others character
         $ascii['b'] = array(223);
         $ascii['c'] = array(231);
         $ascii['d'] = array(208);

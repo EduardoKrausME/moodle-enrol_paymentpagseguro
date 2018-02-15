@@ -1,32 +1,50 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    PagSeguro Internet Ltda.
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Class PagSeguroPaymentParser
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroPaymentParser extends PagSeguroServiceParser {
 
-    /***
+    /**
      * @param $payment PagSeguroPaymentRequest
      * @return mixed
      */
@@ -34,19 +52,16 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
 
         $data = null;
 
-        // pre-approval
         if (property_exists($payment, 'preApproval')) {
             if ($payment->getPreApproval() != null) {
                 $data = PagSeguroPreApprovalParser::getData($payment->getPreApproval());
             }
         }
 
-        // reference
         if ($payment->getReference() != null) {
             $data["reference"] = $payment->getReference();
         }
 
-        // sender
         if ($payment->getSender() != null) {
             if ($payment->getSender()->getName() != null) {
                 $data['senderName'] = $payment->getSender()->getName();
@@ -55,7 +70,6 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
                 $data['senderEmail'] = $payment->getSender()->getEmail();
             }
 
-            // phone
             if ($payment->getSender()->getPhone() != null) {
                 if ($payment->getSender()->getPhone()->getAreaCode() != null) {
                     $data['senderAreaCode'] = $payment->getSender()->getPhone()->getAreaCode();
@@ -65,8 +79,7 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
                 }
             }
 
-            // documents
-            /*** @var $document PagSeguroDocument */
+            /** @var $document PagSeguroDocument */
             if ($payment->getSender()->getDocuments() != null) {
                 $documents = $payment->getSender()->getDocuments();
                 if (is_array($documents) && count($documents) == 1) {
@@ -85,12 +98,10 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
             }
         }
 
-        // currency
         if ($payment->getCurrency() != null) {
             $data['currency'] = $payment->getCurrency();
         }
 
-        // items
         $items = $payment->getItems();
         if (count($items) > 0) {
             $i = 0;
@@ -119,12 +130,10 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
             }
         }
 
-        // extraAmount
         if ($payment->getExtraAmount() != null) {
             $data['extraAmount'] = PagSeguroHelper::decimalFormat($payment->getExtraAmount());
         }
 
-        // shipping
         if ($payment->getShipping() != null) {
             if ($payment->getShipping()->getType() != null && $payment->getShipping()->getType()->getValue() != null) {
                 $data['shippingType'] = $payment->getShipping()->getType()->getValue();
@@ -134,7 +143,6 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
                 $data['shippingCost'] = PagSeguroHelper::decimalFormat($payment->getShipping()->getCost());
             }
 
-            // address
             if ($payment->getShipping()->getAddress() != null) {
                 if ($payment->getShipping()->getAddress()->getStreet() != null) {
                     $data['shippingAddressStreet'] = $payment->getShipping()->getAddress()->getStreet();
@@ -162,26 +170,23 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
                 }
             }
         }
-        // maxAge
+
         if ($payment->getMaxAge() != null) {
             $data['maxAge'] = $payment->getMaxAge();
         }
-        // maxUses
+
         if ($payment->getMaxUses() != null) {
             $data['maxUses'] = $payment->getMaxUses();
         }
 
-        // redirectURL
         if ($payment->getRedirectURL() != null) {
             $data['redirectURL'] = $payment->getRedirectURL();
         }
 
-        // notificationURL
         if ($payment->getNotificationURL() != null) {
             $data['notificationURL'] = $payment->getNotificationURL();
         }
 
-        // metadata
         if (count($payment->getMetaData()->getItems()) > 0) {
             $i = 0;
             foreach ($payment->getMetaData()->getItems() as $item) {
@@ -199,7 +204,6 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
             }
         }
 
-        // paymentMethodConfig
         if (count($payment->getPaymentMethodConfig()->getConfig()) > 0) {
             $i = 0;
             foreach ($payment->getPaymentMethodConfig()->getConfig() as $config) {
@@ -217,7 +221,6 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
             }
         }
 
-        // AcceptedPaymentMethod
         if (count($payment->getAcceptedPaymentMethod()->getConfig()) > 0) {
             $i = 0;
             foreach ($payment->getAcceptedPaymentMethod()->getConfig() as $acceptedPayment) {
@@ -232,7 +235,6 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
             }
         }
 
-        // parameter
         if (count($payment->getParameter()->getItems()) > 0) {
             foreach ($payment->getParameter()->getItems() as $item) {
                 if ($item instanceof PagSeguroParameterItem) {
@@ -250,7 +252,7 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
         return $data;
     }
 
-    /***
+    /**
      * @param $str_xml
      * @return PagSeguroPaymentParserData Success
      */
@@ -263,7 +265,7 @@ class PagSeguroPaymentParser extends PagSeguroServiceParser {
         return $PaymentParserData;
     }
 
-    /***
+    /**
      * @param $str_xml
      * @return parsed transaction
      */

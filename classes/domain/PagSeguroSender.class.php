@@ -1,47 +1,65 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    PagSeguro Internet Ltda.
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Represents the party on the transaction that is sending the money
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroSender {
 
-    /*** Sender name */
+    /** Sender name */
     private $name;
 
-    /*** Sender email */
+    /** Sender email */
     private $email;
 
-    /*** Sender phone */
+    /** Sender phone */
     private $phone;
 
-    /*** Sender documents */
+    /** Sender documents */
     private $documents;
 
-    /*** Sender IP */
+    /** Sender IP */
     private $ip;
 
-    /***
+    /**
      * Initializes a new instance of the Sender class
      *
      * @param array $data
@@ -69,7 +87,7 @@ class PagSeguroSender {
         }
     }
 
-    /***
+    /**
      * Sets the sender name
      * @param String $name
      */
@@ -77,14 +95,14 @@ class PagSeguroSender {
         $this->name = PagSeguroHelper::formatString($name, 50, '');
     }
 
-    /***
+    /**
      * @return String the sender name
      */
     public function getName() {
         return $this->name;
     }
 
-    /***
+    /**
      * Sets the Sender e-mail
      * @param email
      */
@@ -92,14 +110,14 @@ class PagSeguroSender {
         $this->email = $email;
     }
 
-    /***
+    /**
      * @return String the sender e-mail
      */
     public function getEmail() {
         return $this->email;
     }
 
-    /***
+    /**
      * Sets the sender phone
      * @param String $areaCode
      * @param String $number
@@ -108,7 +126,7 @@ class PagSeguroSender {
         $param = $areaCode;
         if ($param instanceof PagSeguroPhone) {
             $this->phone = $param;
-        } elseif ($number) {
+        } else if ($number) {
             $phone = new PagSeguroPhone();
             $phone->setAreaCode($areaCode);
             $phone->setNumber($number);
@@ -116,7 +134,7 @@ class PagSeguroSender {
         }
     }
 
-    /***
+    /**
      * @return PagSeguroPhone the sender phone
      * @see PagSeguroPhone
      */
@@ -124,7 +142,7 @@ class PagSeguroSender {
         return $this->phone;
     }
 
-    /***
+    /**
      * Get Sender documents
      * @return array PagSeguroDocument List of PagSeguroDocument
      * @see PagSeguroDocument
@@ -133,7 +151,7 @@ class PagSeguroSender {
         return $this->documents;
     }
 
-    /***
+    /**
      * Set PagSeguro documents
      * @param array $documents
      * @see PagSeguroDocument
@@ -150,7 +168,7 @@ class PagSeguroSender {
         }
     }
 
-    /***
+    /**
      * Add a document for Sender object
      * @param String $type
      * @param String $value
@@ -164,7 +182,7 @@ class PagSeguroSender {
         }
     }
 
-    /***
+    /**
      * Add an ip for Sender object
      */
     public function getIP() {
@@ -178,7 +196,7 @@ class PagSeguroSender {
             && filter_var($headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             $ip = $headers['X-Forwarded-For'];
 
-        } elseif (array_key_exists('HTTP_X_FORWARDED_FOR', $headers)
+        } else if (array_key_exists('HTTP_X_FORWARDED_FOR', $headers)
             && filter_var($headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             $ip = $headers['HTTP_X_FORWARDED_FOR'];
 

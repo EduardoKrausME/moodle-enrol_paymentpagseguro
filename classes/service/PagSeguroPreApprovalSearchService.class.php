@@ -1,32 +1,50 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    André da Silva Medeiros <andre@swdesign.net.br>
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Encapsulates web service calls regarding PagSeguro payment requests
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroPreApprovalSearchService {
 
-    /***
+    /**
      *
      */
     const SERVICE_NAME = 'preApproval';
@@ -39,7 +57,7 @@ class PagSeguroPreApprovalSearchService {
      */
     private static $connectionData;
 
-    /***
+    /**
      * @param PagSeguroConnectionData $connectionData
      * @param $notificationCode
      * @return string
@@ -49,7 +67,7 @@ class PagSeguroPreApprovalSearchService {
         return "{$url}/{$notificationCode}/?" . $connectionData->getCredentialsUrlQuery();
     }
 
-    /***
+    /**
      * @param PagSeguroConnectionData $connectionData
      * @param $code
      * @return string
@@ -59,7 +77,7 @@ class PagSeguroPreApprovalSearchService {
         return "{$url}{$code}/?" . $connectionData->getCredentialsUrlQuery();
     }
 
-    /***
+    /**
      * @param PagSeguroConnectionData $connectionData
      * @param $code
      * @return string
@@ -157,15 +175,15 @@ class PagSeguroPreApprovalSearchService {
             return self::getResult($connection, $code);
 
         } catch (PagSeguroServiceException $err) {
-            //Logging
+
             LogPagSeguro::error("PagSeguroServiceException: " . $err->getMessage());
-            //Exception
+
             throw $err;
 
         } catch (Exception $err) {
-            //Logging
+
             LogPagSeguro::error("Exception: " . $err->getMessage());
-            //Exception
+
             throw $err;
         }
     }
@@ -193,15 +211,15 @@ class PagSeguroPreApprovalSearchService {
             return self::getResult($connection);
 
         } catch (PagSeguroServiceException $err) {
-            //Logging
+
             LogPagSeguro::error("PagSeguroServiceException: " . $err->getMessage());
-            //Exception
+
             throw $err;
 
         } catch (Exception $err) {
-            //Logging
+
             LogPagSeguro::error("Exception: " . $err->getMessage());
-            //Exception
+
             throw $err;
         }
     }
@@ -223,7 +241,7 @@ class PagSeguroPreApprovalSearchService {
         $initialDate,
         $finalDate = null
     ) {
-        //Logging
+
         $log['text'] = "PagSeguroPreApprovalService.FindByDateInterval(initialDate="
             . PagSeguroHelper::formatDate($initialDate) . ", finalDate=" . PagSeguroHelper::formatDate($finalDate) .
             "begin";
@@ -244,15 +262,15 @@ class PagSeguroPreApprovalSearchService {
             return self::getResult($connection);
 
         } catch (PagSeguroServiceException $err) {
-            //Logging
+
             LogPagSeguro::error("PagSeguroServiceException: " . $err->getMessage());
-            //Exception
+
             throw $err;
 
         } catch (Exception $err) {
-            //Logging
+
             LogPagSeguro::error("Exception: " . $err->getMessage());
-            //Exception
+
             throw $err;
         }
     }
@@ -275,7 +293,7 @@ class PagSeguroPreApprovalSearchService {
         $finalDate = null,
         $reference
     ) {
-        //Logging
+
         $log['text'] = "PagSeguroPreApprovalService.FindByReference(initialDate="
             . PagSeguroHelper::formatDate($initialDate) . ", finalDate=" . PagSeguroHelper::formatDate($finalDate)
             . ", reference=" . $reference . "begin";
@@ -297,15 +315,15 @@ class PagSeguroPreApprovalSearchService {
             return self::getResult($connection);
 
         } catch (PagSeguroServiceException $err) {
-            //Logging
+
             LogPagSeguro::error("PagSeguroServiceException: " . $err->getMessage());
-            //Exception
+
             throw $err;
 
         } catch (Exception $err) {
-            //Logging
+
             LogPagSeguro::error("Exception: " . $err->getMessage());
-            //Exception
+
             throw $err;
         }
     }
@@ -333,15 +351,15 @@ class PagSeguroPreApprovalSearchService {
             return self::getResult($connection, $notificationCode);
 
         } catch (PagSeguroServiceException $err) {
-            //Logging
+
             LogPagSeguro::error("PagSeguroServiceException: " . $err->getMessage());
-            //Exception
+
             throw $err;
 
         } catch (Exception $err) {
-            //Logging
+
             LogPagSeguro::error("Exception: " . $err->getMessage());
-            //Exception
+
             throw $err;
         }
     }
@@ -377,7 +395,6 @@ class PagSeguroPreApprovalSearchService {
                         break;
                 }
 
-                //Logging
                 if (is_null($code) && self::$service == "PreApprovalRequest") {
                     $log['text'] = sprintf(
                         "PagSeguroPreApprovalService.%s(" . $response->toString() . ") - end ",
@@ -395,11 +412,9 @@ class PagSeguroPreApprovalSearchService {
                 $errors = PagSeguroServiceParser::readErrors($response);
                 $errors = new PagSeguroServiceException($httpStatus, $errors);
 
-                //Logging
                 $log['text'] = sprintf("PagSeguroPreApprovalService.%s($code) - error ", self::$service);
                 LogPagSeguro::error($log['text'] . $errors->getOneLineMessage());
 
-                //Exception
                 throw $errors;
 
                 break;
@@ -407,11 +422,9 @@ class PagSeguroPreApprovalSearchService {
 
                 $errors = new PagSeguroServiceException($httpStatus);
 
-                //Logging
                 $log['text'] = sprintf("PagSeguroPreApprovalService.%s($code) - error ", self::$service);
                 LogPagSeguro::error($log['text'] . $errors->getOneLineMessage());
 
-                //Exception
                 throw $errors;
 
                 break;

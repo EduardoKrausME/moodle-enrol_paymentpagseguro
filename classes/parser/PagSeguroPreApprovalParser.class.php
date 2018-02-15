@@ -1,29 +1,47 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    André da Silva Medeiros <andre@swdesign.net.br>
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Class PagSeguroPreApprovalParser
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroPreApprovalParser {
 
     /**
@@ -120,7 +138,6 @@ class PagSeguroPreApprovalParser {
             $data["preApprovalCode"] = $preApproval->getPreApprovalCode();
         };
 
-        // items
         $items = $preApproval->getItems();
         if (count($items) > 0) {
             $i = 0;
@@ -155,70 +172,58 @@ class PagSeguroPreApprovalParser {
         $data = $parser->getResult('preApproval');
         $preApproval = new PagSeguroPreApproval();
 
-        // <preApproval> <name>
         if (isset($data["name"])) {
             $preApproval->setName($data["name"]);
         }
 
-        // <preApproval> <lastEventDate>
         if (isset($data["lastEventDate"])) {
             $preApproval->setLastEventDate($data["lastEventDate"]);
         }
 
-        // <preApproval> <date>
         if (isset($data["date"])) {
             $preApproval->setDate($data["date"]);
         }
 
-        // <preApproval> <code>
         if (isset($data["code"])) {
             $preApproval->setCode($data["code"]);
         }
 
-        // <preApproval> <tracker>
         if (isset($data["tracker"])) {
             $preApproval->setTracker($data["tracker"]);
         }
 
-        // <preApproval> <reference>
         if (isset($data["reference"])) {
             $preApproval->setReference($data["reference"]);
         }
 
-        // <preApproval> <charge>
         if (isset($data["charge"])) {
             $preApproval->setCharge($data["charge"]);
         }
 
-        // <preApproval> <status>
         if (isset($data["status"])) {
             $preApproval->setStatus(new PagSeguroPreApprovalStatus($data["status"]));
         }
 
         if (isset($data["sender"])) {
-            // <preApproval> <sender>
+
             $sender = new PagSeguroSender();
 
-            // <preApproval> <sender> <name>
             if (isset($data["sender"]["name"])) {
                 $sender->setName($data["sender"]["name"]);
             }
 
-            // <preApproval> <sender> <email>
             if (isset($data["sender"]["email"])) {
                 $sender->setEmail($data["sender"]["email"]);
             }
 
             if (isset($data["sender"]["phone"])) {
-                // <preApproval> <sender> <phone>
+
                 $phone = new PagSeguroPhone();
 
-                // <preApproval> <sender> <phone> <areaCode>
                 if (isset($data["sender"]["phone"]["areaCode"])) {
                     $phone->setAreaCode($data["sender"]["phone"]["areaCode"]);
                 }
 
-                // <preApproval> <sender> <phone> <number>
                 if (isset($data["sender"]["phone"]["number"])) {
                     $phone->setNumber($data["sender"]["phone"]["number"]);
                 }
@@ -226,7 +231,6 @@ class PagSeguroPreApprovalParser {
                 $sender->setPhone($phone);
             }
 
-            // <preApproval><sender><documents>
             if (isset($data["sender"]['documents']) && is_array($data["sender"]['documents'])) {
                 $documents = $data["sender"]['documents'];
                 if (count($documents) > 0) {
@@ -319,7 +323,7 @@ class PagSeguroPreApprovalParser {
         $parser = new PagSeguroXmlParser($str_xml);
         $data = $parser->getResult('result');
         $preApprovalParser = new PagSeguroParserData();
-        $preApprovalParser->setCode(null); // PreApproval API does not send code on cancel requests
+        $preApprovalParser->setCode(null);
         $preApprovalParser->setRegistrationDate($data['date']);
         $preApprovalParser->setStatus($data['status']);
         return $preApprovalParser;

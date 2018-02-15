@@ -1,32 +1,50 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    PagSeguro Internet Ltda.
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Class PagSeguroTransactionParser
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroTransactionParser extends PagSeguroServiceParser {
 
-    /***
+    /**
      * @param $str_xml
      * @return PagSeguroTransactionSearchResult
      */
@@ -69,56 +87,46 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
         return $searchResutlt;
     }
 
-    /***
+    /**
      * @param $str_xml
      * @return PagSeguroTransaction
      */
     public static function readTransaction($str_xml) {
 
-        // Parser
         $parser = new PagSeguroXmlParser($str_xml);
 
-        // <transaction>
         $data = $parser->getResult('transaction');
 
         $transaction = new PagSeguroTransaction();
 
-        // <transaction> <lastEventDate>
         if (isset($data["lastEventDate"])) {
             $transaction->setLastEventDate($data["lastEventDate"]);
         }
 
-        // <transaction> <date>
         if (isset($data["date"])) {
             $transaction->setDate($data["date"]);
         }
 
-        // <transaction> <code>
         if (isset($data["code"])) {
             $transaction->setCode($data["code"]);
         }
 
-        // <transaction> <reference>
         if (isset($data["reference"])) {
             $transaction->setReference($data["reference"]);
         }
 
-        // <transaction> <recoveryCode>
         if (isset($data["recoveryCode"])) {
             $transaction->setRecoveryCode($data["recoveryCode"]);
         }
 
-        // <transaction> <type>
         if (isset($data["type"])) {
             $transaction->setType(new PagSeguroTransactionType($data["type"]));
         }
 
-        // <transaction> <status>
         if (isset($data["status"])) {
             $transaction->setStatus(new PagSeguroTransactionStatus($data["status"]));
         }
 
-        // <transaction> <cancellationSource>
         if (isset($data["cancellationSource"])) {
             $transaction->setCancellationSource(
                 new PagSeguroTransactionCancellationSource($data["cancellationSource"])
@@ -126,15 +134,13 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
         }
 
         if (isset($data["paymentMethod"]) && is_array($data["paymentMethod"])) {
-            // <transaction> <paymentMethod>
+
             $paymentMethod = new PagSeguroPaymentMethod();
 
-            // <transaction> <paymentMethod> <type>
             if (isset($data["paymentMethod"]['type'])) {
                 $paymentMethod->setType(new PagSeguroPaymentMethodType($data["paymentMethod"]['type']));
             }
 
-            // <transaction> <paymentMethod> <code>
             if (isset($data["paymentMethod"]['code'])) {
                 $paymentMethod->setCode(new PagSeguroPaymentMethodCode($data["paymentMethod"]['code']));
             }
@@ -142,72 +148,64 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
             $transaction->setPaymentMethod($paymentMethod);
         }
 
-        // <transaction> <paymentLink>
         if (isset($data["paymentLink"])) {
             $transaction->setPaymentLink($data["paymentLink"]);
         }
 
-        // <transaction> <grossAmount>
         if (isset($data["grossAmount"])) {
             $transaction->setGrossAmount($data["grossAmount"]);
         }
 
-        // <transaction> <discountAmount>
         if (isset($data["discountAmount"])) {
             $transaction->setDiscountAmount($data["discountAmount"]);
         }
 
-        // <transaction> <feeAmount>
         if (isset($data["feeAmount"])) {
             $transaction->setFeeAmount($data["feeAmount"]);
         }
 
-        // <transaction> <netAmount>
         if (isset($data["netAmount"])) {
             $transaction->setNetAmount($data["netAmount"]);
         }
 
-        //<transaction><escrowEndDate>
+
         if (isset($data["escrowEndDate"])) {
             $transaction->setEscrowEndDate($data["escrowEndDate"]);
         }
 
-        // <transaction> <extraAmount>
         if (isset($data["extraAmount"])) {
             $transaction->setExtraAmount($data["extraAmount"]);
         }
 
-        // <transaction> <installmentCount>
         if (isset($data["installmentCount"])) {
             $transaction->setInstallmentCount($data["installmentCount"]);
         }
 
-        // <transaction> <creditorFees>
         if (isset($data["creditorFees"])) {
             $transaction->setCreditorFees(new PagSeguroTransactionCreditorFees($data["creditorFees"]));
         }
 
-        //<transaction><operationalFeeAmount>
+
         if (isset($data["operationalFeeAmount"])) {
             $transaction->setOperationalFeeAmount($data["operationalFeeAmount"]);
         }
 
-        //<transaction><installmentFeeAmount>
+
         if (isset($data["installmentFeeAmount"])) {
             $transaction->setInstallmentFeeAmount($data["installmentFeeAmount"]);
         }
 
-        //<transaction><intermediationRateAmount>
+
         if (isset($data["intermediationRateAmount"])) {
             $transaction->setIntermediationRateAmount($data["intermediationRateAmount"]);
         }
 
-        //<transaction><intermediationFeeAmount>
+
         if (isset($data["intermediationFeeAmount"])) {
             $transaction->setIntermediationFeeAmount($data["intermediationFeeAmount"]);
         }
 
-        //<transaction><items>
+
         if (isset($data["items"]['item']) && is_array($data["items"]['item'])) {
             $items = array();
             $i = 0;
@@ -222,34 +220,29 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
                 $items[0] = self::parseTransactionItem($data["items"]['item']);
             }
 
-            // <transaction> <items>
             $transaction->setItems($items);
         }
 
         if (isset($data["sender"])) {
-            // <transaction> <sender>
+
             $sender = new PagSeguroSender();
 
-            // <transaction> <sender> <name>
             if (isset($data["sender"]["name"])) {
                 $sender->setName($data["sender"]["name"]);
             }
 
-            // <transaction> <sender> <email>
             if (isset($data["sender"]["email"])) {
                 $sender->setEmail($data["sender"]["email"]);
             }
 
             if (isset($data["sender"]["phone"])) {
-                // <transaction> <sender> <phone>
+
                 $phone = new PagSeguroPhone();
 
-                // <transaction> <sender> <phone> <areaCode>
                 if (isset($data["sender"]["phone"]["areaCode"])) {
                     $phone->setAreaCode($data["sender"]["phone"]["areaCode"]);
                 }
 
-                // <transaction> <sender> <phone> <number>
                 if (isset($data["sender"]["phone"]["number"])) {
                     $phone->setNumber($data["sender"]["phone"]["number"]);
                 }
@@ -257,7 +250,6 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
                 $sender->setPhone($phone);
             }
 
-            // <transaction><sender><documents>
             if (isset($data["sender"]['documents']) && is_array($data["sender"]['documents'])) {
                 $documents = $data["sender"]['documents'];
                 if (count($documents) > 0) {
@@ -271,59 +263,49 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
         }
 
         if (isset($data["shipping"]) && is_array($data["shipping"])) {
-            // <transaction> <shipping>
+
             $shipping = new PagSeguroShipping();
 
-            // <transaction> <shipping> <type>
             if (isset($data["shipping"]["type"])) {
                 $shipping->setType(new PagSeguroShippingType($data["shipping"]["type"]));
             }
 
-            // <transaction> <shipping> <cost>
             if (isset($data["shipping"]["cost"])) {
                 $shipping->setCost($data["shipping"]["cost"]);
             }
 
             if (isset($data["shipping"]["address"]) && is_array($data["shipping"]["address"])) {
-                // <transaction> <shipping> <address>
+
                 $address = new PagSeguroAddress();
 
-                // <transaction> <shipping> <address> <street>
                 if (isset($data["shipping"]["address"]["street"])) {
                     $address->setStreet($data["shipping"]["address"]["street"]);
                 }
 
-                // <transaction> <shipping> <address> <number>
                 if (isset($data["shipping"]["address"]["number"])) {
                     $address->setNumber($data["shipping"]["address"]["number"]);
                 }
 
-                // <transaction> <shipping> <address> <complement>
                 if (isset($data["shipping"]["address"]["complement"])) {
                     $address->setComplement($data["shipping"]["address"]["complement"]);
                 }
 
-                // <transaction> <shipping> <address> <city>
                 if (isset($data["shipping"]["address"]["city"])) {
                     $address->setCity($data["shipping"]["address"]["city"]);
                 }
 
-                // <transaction> <shipping> <address> <state>
                 if (isset($data["shipping"]["address"]["state"])) {
                     $address->setState($data["shipping"]["address"]["state"]);
                 }
 
-                // <transaction> <shipping> <address> <district>
                 if (isset($data["shipping"]["address"]["district"])) {
                     $address->setDistrict($data["shipping"]["address"]["district"]);
                 }
 
-                // <transaction> <shipping> <address> <postalCode>
                 if (isset($data["shipping"]["address"]["postalCode"])) {
                     $address->setPostalCode($data["shipping"]["address"]["postalCode"]);
                 }
 
-                // <transaction> <shipping> <address> <country>
                 if (isset($data["shipping"]["address"]["country"])) {
                     $address->setCountry($data["shipping"]["address"]["country"]);
                 }
@@ -331,43 +313,36 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
                 $shipping->setAddress($address);
             }
 
-            // <transaction> <shipping>
             $transaction->setShipping($shipping);
         }
 
         return $transaction;
     }
 
-    /***
+    /**
      * @param $data
      * @return PagSeguroItem
      */
     private static function parseTransactionItem($data) {
 
-        // <transaction> <items> <item>
         $item = new PagSeguroItem();
 
-        // <transaction> <items> <item> <id>
         if (isset($data["id"])) {
             $item->setId($data["id"]);
         }
 
-        // <transaction> <items> <item> <description>
         if (isset($data["description"])) {
             $item->setDescription($data["description"]);
         }
 
-        // <transaction> <items> <item> <quantity>
         if (isset($data["quantity"])) {
             $item->setQuantity($data["quantity"]);
         }
 
-        // <transaction> <items> <item> <amount>
         if (isset($data["amount"])) {
             $item->setAmount($data["amount"]);
         }
 
-        // <transaction> <items> <item> <weight>
         if (isset($data["weight"])) {
             $item->setWeight($data["weight"]);
         }
@@ -375,7 +350,7 @@ class PagSeguroTransactionParser extends PagSeguroServiceParser {
         return $item;
     }
 
-    /***
+    /**
      * @param $data
      * @return PagSeguroTransactionSummary
      */

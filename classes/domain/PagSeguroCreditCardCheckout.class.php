@@ -1,60 +1,78 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    PagSeguro Internet Ltda.
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * CreditCard Checkout information
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroCreditCardCheckout {
 
-    /***
+    /**
      * Credit Card Brand
      */
     private $brand;
 
-    /***
+    /**
      * Credit Card Token
      */
     private $token;
 
-    /***
+    /**
      * Credit Card Holder
      * @see PagSeguroCreditCardHolder
      */
     private $holder;
 
-    /***
+    /**
      * Credit Card Installment
      * @see PagSeguroInstallment
      */
     private $installment;
 
-    /***
+    /**
      * Credit Card Billing Adress
      * @see PagSeguroBilling
      */
     private $billing;
 
-    /***
+    /**
      * Initializes a new instance of the PagSeguroCreditCardCheckout class
      * @param array $data
      */
@@ -78,7 +96,7 @@ class PagSeguroCreditCardCheckout {
         }
     }
 
-    /***
+    /**
      * Sets the credit card brand
      * @param string $brand
      */
@@ -86,14 +104,14 @@ class PagSeguroCreditCardCheckout {
         $this->brand = $brand;
     }
 
-    /***
+    /**
      * @return string the credit card brand
      */
     public function getBrand() {
         return $this->brand;
     }
 
-    /***
+    /**
      * Sets the credit card token
      * @param mixed $token
      */
@@ -101,14 +119,14 @@ class PagSeguroCreditCardCheckout {
         $this->token = $token;
     }
 
-    /***
+    /**
      * @return mixed the credit card token
      */
     public function getToken() {
         return $this->token;
     }
 
-    /***
+    /**
      * Sets the PagSeguroCreditCardHolder
      * @param intanceof PagSeguroCreditCardHolder $holder
      */
@@ -116,7 +134,7 @@ class PagSeguroCreditCardCheckout {
         $this->holder = $holder;
     }
 
-    /***
+    /**
      * @return PagSeguroCreditCardHolder object
      * @see PagSeguroCreditCardHolder
      */
@@ -124,7 +142,7 @@ class PagSeguroCreditCardCheckout {
         return $this->holder;
     }
 
-    /***
+    /**
      * Sets the PagSeguroInstallment
      * @param intanceof PagSeguroInstallment $installment
      */
@@ -132,7 +150,7 @@ class PagSeguroCreditCardCheckout {
         $this->installment = $installment;
     }
 
-    /***
+    /**
      * @return PagSeguroInstallment object
      * @see PagSeguroInstallment
      */
@@ -140,7 +158,7 @@ class PagSeguroCreditCardCheckout {
         return $this->installment;
     }
 
-    /***
+    /**
      * Sets the PagSeguroBilling
      * @param intanceof PagSeguroBilling $billing
      */
@@ -148,7 +166,7 @@ class PagSeguroCreditCardCheckout {
         $this->billing = $billing;
     }
 
-    /***
+    /**
      * @return PagSeguroBilling object
      * @see PagSeguroBilling
      */

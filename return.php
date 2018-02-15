@@ -15,33 +15,37 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Plugin return file.
+ *
  * @package    enrol_paymentpagseguro
  * @copyright  2018 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require("../../config.php");
-require dirname(__FILE__) . '/classes/PagSeguroLibrary.php';
+require(dirname(__FILE__) . '/classes/PagSeguroLibrary.php');
+
+admin_externalpage_setup('returpaymentpagseguro');
 
 $notification = optional_param('notificationType', false, PARAM_RAW);
 
 if ($notification) {
     if ($notification == 'transaction') {
         proccess_transaction();
-    } elseif ($notification == 'preApproval') {
-        proccess_preApproval();
+    } else if ($notification == 'preApproval') {
+        proccess_preapproval();
     }
 }
 
 die('API de retorno do PagSeguro!');
 
-function proccess_preApproval() {
+function proccess_preapproval() {
 
     global $DB;
 
-    $notificationCode = optional_param('notificationCode', false, PARAM_RAW);
+    $notificationcode = optional_param('notificationCode', false, PARAM_RAW);
 
-    if (!$notificationCode) {
+    if (!$notificationcode) {
         die('API de retorno do PagSeguro!');
     }
 
@@ -49,7 +53,7 @@ function proccess_preApproval() {
 
         $response = PagSeguroNotificationService::checkPreApproval(
             PagSeguroConfig::getAccountCredentials(),
-            $notificationCode
+            $notificationcode
         );
 
         $paymentpagseguroid = str_replace("REF", "", $response->getReference());
@@ -57,16 +61,18 @@ function proccess_preApproval() {
         $paymentpagseguro = $DB->get_record('enrol_paymentpagseguro', array('id' => $paymentpagseguroid));
         if ($paymentpagseguro) {
 
-            $plugin_instance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
+            $plugininstance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
 
             if ($response->getStatus()->getValue() == 3) {
                 $plugin = enrol_get_plugin('paymentpagseguro');
-                $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_ACTIVE);
-            } elseif ($response->getStatus()->getValue() >= 5) {
+                $plugin->enrol_user($plugininstance, $paymentpagseguro->userid,
+                    $plugininstance->roleid, time(), 0, ENROL_USER_ACTIVE);
+            } else if ($response->getStatus()->getValue() >= 5) {
 
-                if ($plugin_instance->customint2) {
+                if ($plugininstance->customint2) {
                     $plugin = enrol_get_plugin('paymentpagseguro');
-                    $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_SUSPENDED);
+                    $plugin->enrol_user($plugininstance, $paymentpagseguro->userid,
+                        $plugininstance->roleid, time(), 0, ENROL_USER_SUSPENDED);
                 }
             }
         }
@@ -81,16 +87,16 @@ function proccess_transaction() {
 
     global $DB;
 
-    $notificationCode = optional_param('notificationCode', false, PARAM_RAW);
+    $notificationcode = optional_param('notificationCode', false, PARAM_RAW);
 
-    if (!$notificationCode) {
+    if (!$notificationcode) {
         die('API de retorno do PagSeguro!');
     }
 
     try {
         $response = PagSeguroNotificationService::checkTransaction(
             PagSeguroConfig::getAccountCredentials(),
-            $notificationCode
+            $notificationcode
         );
 
         $paymentpagseguroid = str_replace("REF", "", $response->getReference());
@@ -98,16 +104,18 @@ function proccess_transaction() {
         $paymentpagseguro = $DB->get_record('enrol_paymentpagseguro', array('id' => $paymentpagseguroid));
         if ($paymentpagseguro) {
 
-            $plugin_instance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
+            $plugininstance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
 
             if ($response->getStatus()->getValue() == 3) {
                 $plugin = enrol_get_plugin('paymentpagseguro');
-                $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_ACTIVE);
-            } elseif ($response->getStatus()->getValue() >= 5) {
+                $plugin->enrol_user($plugininstance, $paymentpagseguro->userid,
+                    $plugininstance->roleid, time(), 0, ENROL_USER_ACTIVE);
+            } else if ($response->getStatus()->getValue() >= 5) {
 
-                if ($plugin_instance->customint2) {
+                if ($plugininstance->customint2) {
                     $plugin = enrol_get_plugin('paymentpagseguro');
-                    $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_SUSPENDED);
+                    $plugin->enrol_user($plugininstance, $paymentpagseguro->userid,
+                        $plugininstance->roleid, time(), 0, ENROL_USER_SUSPENDED);
                 }
             }
         }

@@ -1,29 +1,47 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * 2007-2014 [PagSeguro Internet Ltda.]
  *
  * NOTICE OF LICENSE
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * @author    André da Silva Medeiros <andre@swdesign.net.br>
  * @copyright 2007-2014 PagSeguro Internet Ltda.
  * @license   http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/***
+/**
  * Represents a preApproval request
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class PagSeguroPreApprovalRequest extends PagSeguroRequest {
 
     /**
@@ -91,7 +109,7 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
      */
     private $preApprovalCharge;
 
-    /***
+    /**
      * Sets the review URL
      *
      * Uri to where the PagSeguro payment page should redirect the user if they want to change the Pre Approval rules
@@ -124,7 +142,7 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         return $this->receiverEmail;
     }
 
-    /***
+    /**
      * Sets the preApprovalMaxTotalAmount for this pre approval
      * @param double $value
      */
@@ -132,14 +150,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalMaxTotalAmount = $value;
     }
 
-    /***
+    /**
      * @return double the reference of preApprovalMaxTotalAmount
      */
     public function getPreApprovalMaxTotalAmount() {
         return $this->preApprovalMaxTotalAmount;
     }
 
-    /***
+    /**
      * Sets the preApprovalMaxAmountPerPeriod for this pre approval
      * @param double $value
      */
@@ -147,14 +165,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalMaxAmountPerPeriod = $value;
     }
 
-    /***
+    /**
      * @return double the reference of preApprovalMaxAmountPerPeriod
      */
     public function getPreApprovalMaxAmountPerPeriod() {
         return $this->preApprovalMaxAmountPerPeriod;
     }
 
-    /***
+    /**
      * Sets the preApprovalFinalDate for this pre approval
      * @param ISODate $date
      */
@@ -162,14 +180,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalFinalDate = $date;
     }
 
-    /***
+    /**
      * @return date the reference of preApprovalFinalDate
      */
     public function getPreApprovalFinalDate() {
         return $this->preApprovalFinalDate;
     }
 
-    /***
+    /**
      * Sets the preApprovalInitialDate for this pre approval
      * @param ISODate $date
      */
@@ -177,14 +195,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalInitialDate = $date;
     }
 
-    /***
+    /**
      * @return date the reference of preApprovalInitialDate
      */
     public function getPreApprovalInitialDate() {
         return $this->preApprovalInitialDate;
     }
 
-    /***
+    /**
      * Sets the preApprovalDayOfMonth for this pre approval
      * @param Number $day
      */
@@ -192,14 +210,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalDayOfMonth = $day;
     }
 
-    /***
+    /**
      * @return int the reference of preApprovalInitialDate
      */
     public function getPreApprovalDayOfMonth() {
         return $this->preApprovalDayOfMonth;
     }
 
-    /***
+    /**
      * Sets the preApprovalDayOfWeek for this pre approval
      * @param String $day
      */
@@ -207,7 +225,7 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalDayOfWeek = $day;
     }
 
-    /***
+    /**
      * @return String the reference of preApprovalDayOfWeek
      */
     public function getPreApprovalDayOfWeek() {
@@ -229,7 +247,7 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         return $this->preApprovalDayOfYear;
     }
 
-    /***
+    /**
      * Sets the preApprovalPeriod for this pre approval
      * @param String $period
      */
@@ -237,14 +255,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalPeriod = $period;
     }
 
-    /***
+    /**
      * @return String the reference of preApprovalPeriod
      */
     public function getPreApprovalPeriod() {
         return $this->preApprovalPeriod;
     }
 
-    /***
+    /**
      * Sets the preApprovalAmountPerPayment value for the recurrent payment
      * @param double $value
      */
@@ -252,7 +270,7 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalAmountPerPayment = $value;
     }
 
-    /***
+    /**
      * @return double the reference of preApprovalAmountPerPayment
      */
     public function getPreApprovalAmountPerPayment() {
@@ -289,7 +307,7 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         return $this->preApprovalMaxPaymentsPerPeriod;
     }
 
-    /***
+    /**
      * Sets the preApprovalDetails for the transaction
      * @param String $details
      */
@@ -297,14 +315,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalDetails = $details;
     }
 
-    /***
+    /**
      * @return String the reference of preApprovalDetails
      */
     public function getPreApprovalDetails() {
         return $this->preApprovalDetails;
     }
 
-    /***
+    /**
      * Sets the preApprovalName (title) for the transaction
      * @param String $name
      */
@@ -312,14 +330,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalName = $name;
     }
 
-    /***
+    /**
      * @return String the reference of preApprovalName (title)
      */
     public function getPreApprovalName() {
         return $this->preApprovalName;
     }
 
-    /***
+    /**
      * Sets the preApprovalCharge type (auto, manual)
      * @param String $type
      */
@@ -327,14 +345,14 @@ class PagSeguroPreApprovalRequest extends PagSeguroRequest {
         $this->preApprovalCharge = $type;
     }
 
-    /***
+    /**
      * @return String the reference of pre approval charge
      */
     public function getPreApprovalCharge() {
         return $this->preApprovalCharge;
     }
 
-    /***
+    /**
      * Register the preApproval
      * @param PagSeguroCredentials $credentials
      * @param bool $onlyCheckoutCode
