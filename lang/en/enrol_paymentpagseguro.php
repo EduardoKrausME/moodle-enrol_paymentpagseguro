@@ -20,55 +20,54 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Inscrição com pagamento pelo Pagseguro';
-$string['pluginname_desc'] = 'Libera curso mediante pagamento via Pagseguro!';
+$string['pluginname'] = 'Subscription with payment by Pagseguro';
+$string['pluginname_desc'] = 'Free course for payment via Pagseguro!';
 
-$string['paymentpagseguro:config'] = 'Configure o métido de inscrição do pagseguro';
-$string['paymentpagseguro:manage'] = 'Gerencie os usuários inscritos';
-$string['paymentpagseguro:unenrol'] = 'Descadastrar os usuários do curso';
-$string['paymentpagseguro:unenrolself'] = 'Retire-me do curso';
-$string['unenrolselfconfirm'] = 'Você realmente deseja se desinstalar do curso "{$a}"?';
+$string['paymentpagseguro:config'] = 'Configure the enrollment method of the pagseguro';
+$string['paymentpagseguro:manage'] = 'Manage subscribed users';
+$string['paymentpagseguro:unenrol'] = 'Disenroll course users';
+$string['paymentpagseguro:unenrolself'] = 'Remove me from course';
+$string['unenrolselfconfirm'] = 'Do you really want to uninstall from the course "{$ a}"?';
 
-$string['urlretorno'] = 'A URL de retorno é <code>{$a}</code>!';
+$string['urlretorno'] = 'The return URL is <code>{$a}</code>!';
 
-$string['email'] = 'Email do PagSeguro';
-$string['email_desc'] = 'Email do PagSeguro';
+$string['email'] = 'PagSeguro Email';
+$string['email_desc'] = 'PagSeguro Email';
 
-$string['token'] = 'Token do PagSeguro';
-$string['token_desc'] = 'Token do PagSeguro';
+$string['token'] = 'Secure Pagen Token';
+$string['token_desc'] = 'Secure Pagen Token';
 
-$string['subscriptions'] = 'Habilitar assinaturas no formulário';
-$string['subscriptions_desc'] = 'Se marcado, na inscrição habilita a opção de assinaturas.';
+$string['subscriptions'] = 'Enable signatures on the form';
+$string['subscriptions_desc'] = 'If checked, the subscription enables the signatures option.';
 
-$string['status'] = 'Habilitar assinaturas?';
+$string['status'] = 'Enable signatures?';
 
-$string['expiredaction'] = 'Ação ao expirar a matrícula';
-$string['expiredaction_help'] = 'Qual ação tomar ao expirar a matrícula?';
+$string['expiredaction'] = 'Action upon expiration of enrollment';
+$string['expiredaction_help'] = 'What action do you take when the registration expires?';
 
-$string['cost'] = 'Preço cobrado todo mês';
-$string['cost_help'] = 'Valor cobrado em cada mês na mensalidade!';
-$string['costerror'] = 'O preço de inscrição deve ser número';
+$string['cost'] = 'Price charged every month';
+$string['cost_help'] = 'Amount charged in each month in the monthly payment!';
+$string['costerror'] = 'The subscription price must be number';
 
-$string['cost2'] = 'Preço para inscrição';
-$string['cost2_help'] = 'Valor que o usuário deve pagar para ter acesso ao curso!';
+$string['cost2'] = 'Price for registration';
+$string['cost2_help'] = 'Value the user must pay to access the course!';
 
-$string['months'] = 'Número de meses';
-$string['months_help'] = 'Se definir como 0 (ZERO) o pagamento é único. Se definir maior que 3 será mensalidade!';
-$string['monthserror'] = 'Mês deve ser um número inteiro entre 0 e 24!';
-$string['monthsmaxerror'] = 'Máximo 24 meses';
+$string['months'] = 'Number of months';
+$string['months_help'] = 'If set to 0 (ZERO) the payment is unique. If you set more than 3 it will be monthly!';
+$string['monthserror'] = 'Month must be an integer between 0 and 24!';
+$string['monthsmaxerror'] = 'Maximum 24 months';
 
-$string['faulback'] = 'Desativar na inadimplência?';
-$string['faulback_help'] = 'Se o pagamento da mensalidade falhar, a matrícula deve ser desativada?!';
+$string['faulback'] = 'Disable in default?';
+$string['faulback_help'] = 'If payment of tuition fails, tuition must be disabled ?!';
 
-$string['enrolperiod'] = 'Duração da inscrição';
-$string['enrolperiod_help'] = 'Duração de tempo que a inscrição é válida, iniciando no momento que o usuário é inscrito. Caso desabilitado, a duração da inscrição será ilimitada.';
+$string['enrolperiod'] = 'Duration of enrollment';
+$string['enrolperiod_help'] = 'The length of time the subscription is valid, starting at the time the user is enrolled. If disabled, the duration of registration shall be unlimited.';
 
-$string['enrolstartdate'] = 'Início das inscrições';
-$string['enrolstartdate_help'] = 'Se habilitado, os usuários só podem ser inscritos a partir desta data.';
+$string['enrolstartdate'] = 'Start of entries';
+$string['enrolstartdate_help'] = 'If enabled, users can only be enrolled as of this date.';
 
-$string['enrolenddate'] = 'Data limite das inscrições';
-$string['enrolenddate_help'] = 'Se habilitado, os usuários só podem se inscrever até esta data.';
+$string['enrolenddate'] = 'Application Deadline';
+$string['enrolenddate_help'] = 'If enabled, users can only subscribe by this date.';
 
-$string['defaultrole'] = 'Atribuir papel';
-$string['defaultrole_help'] = 'Selecione o papel que deve ser atribuído aos usuários durante as inscrições pagas via Pagseguro';
-
+$string['defaultrole'] = 'Assign Paper';
+$string['defaultrole_help'] = 'Select the role that should be assigned to users during registrations paid via Pagseguro';

@@ -37,6 +37,8 @@ die('API de retorno do PagSeguro!');
 
 function proccess_preApproval() {
 
+    global $DB;
+
     $notificationCode = optional_param('notificationCode', false, PARAM_RAW);
 
     if (!$notificationCode) {
@@ -61,8 +63,11 @@ function proccess_preApproval() {
                 $plugin = enrol_get_plugin('paymentpagseguro');
                 $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_ACTIVE);
             } elseif ($response->getStatus()->getValue() >= 5) {
-                $plugin = enrol_get_plugin('paymentpagseguro');
-                $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_SUSPENDED);
+
+                if ($plugin_instance->customint2) {
+                    $plugin = enrol_get_plugin('paymentpagseguro');
+                    $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_SUSPENDED);
+                }
             }
         }
 
@@ -99,8 +104,11 @@ function proccess_transaction() {
                 $plugin = enrol_get_plugin('paymentpagseguro');
                 $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_ACTIVE);
             } elseif ($response->getStatus()->getValue() >= 5) {
-                $plugin = enrol_get_plugin('paymentpagseguro');
-                $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_SUSPENDED);
+
+                if ($plugin_instance->customint2) {
+                    $plugin = enrol_get_plugin('paymentpagseguro');
+                    $plugin->enrol_user($plugin_instance, $paymentpagseguro->userid, $plugin_instance->roleid, time(), 0, ENROL_USER_SUSPENDED);
+                }
             }
         }
     } catch (Exception $e) {
