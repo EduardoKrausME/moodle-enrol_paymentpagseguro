@@ -76,6 +76,11 @@ class enrol_paymentpagseguro_edit_form extends moodleform {
         $mform->setDefault('roleid', 5);
         $mform->addHelpButton('roleid', 'defaultrole', 'enrol_paymentpagseguro');
 
+        $mform->addElement('duration', 'enrolperiod', get_string('enrolperiod', 'enrol_paymentpagseguro'),
+            array('optional' => true, 'defaultunit' => 86400));
+        $mform->setDefault('enrolperiod', 0);
+        $mform->addHelpButton('enrolperiod', 'enrolperiod', 'enrol_paymentpagseguro');
+
         $options = array('optional' => true);
         $mform->addElement('date_time_selector', 'enrolstartdate',
             get_string('enrolstartdate', 'enrol_paymentpagseguro'), $options);

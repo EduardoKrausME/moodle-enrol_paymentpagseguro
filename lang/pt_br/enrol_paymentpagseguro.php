@@ -60,10 +60,10 @@ $string['monthserror'] = 'Mês deve ser um número inteiro entre 0 e 24!';
 $string['monthsmaxerror'] = 'Máximo 24 meses';
 
 $string['faulback'] = 'Desativar na inadimplência?';
-$string['faulback_help'] = 'Se o pagamento da mensalidade falhar, a matrícula deve ser desativada?!';
+$string['faulback_help'] = 'Se o pagamento da mensalidade falhar, a matrícula deve ser desativada?<br>Em caso de pagamento único remove caso de Chargeback ou disputa';
 
 $string['enrolperiod'] = 'Duração da inscrição';
-$string['enrolperiod_help'] = 'Duração de tempo que a inscrição é válida, iniciando no momento que o usuário é inscrito. Caso desabilitado, a duração da inscrição será ilimitada.';
+$string['enrolperiod_help'] = 'Duração de tempo que a inscrição é válida, iniciando no momento que o usuário é inscrito. Caso desabilitado, a duração da inscrição será ilimitada. Este tempo não tem efeito em Assinaturas!';
 
 $string['enrolstartdate'] = 'Início das inscrições';
 $string['enrolstartdate_help'] = 'Se habilitado, os usuários só podem ser inscritos a partir desta data.';

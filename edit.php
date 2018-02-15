@@ -71,9 +71,10 @@ if ($mform->is_cancelled()) {
     $instance->roleid = $data->roleid;
     $instance->enrolstartdate = $data->enrolstartdate;
     $instance->enrolenddate = $data->enrolenddate;
+    $instance->enrolperiod = $data->enrolperiod;
     $instance->timemodified = time();
-    $instance->customint1 = $data->customint1;
-    $instance->customint2 = $data->customint2;
+    $instance->customint1 = $data->customint1; // Meses
+    $instance->customint2 = $data->customint2; // faulback
 
     if ($instance->id) {
         $reset = ($instance->status != $data->status);
