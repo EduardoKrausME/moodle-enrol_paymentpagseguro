@@ -12,5 +12,5 @@ Venda pacotes de cursos, cupons de desconto, Histórico de transações e Sistem
 
 ## Tutoriais da Wiki
 
-
-
+* [Instalando o Enrol Payment Pagseguro](../Instalando-o-Plugin)
+* [Configurando o Plugin](../Configurando-o-Plugin)
