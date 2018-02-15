@@ -10,7 +10,16 @@ Este plugin traz ao mesmo tempo possíbilidades de assinaturas, ou possíbilidad
 
 Venda pacotes de cursos, cupons de desconto, Histórico de transações e Sistema anti-fraude você encontra no [MoodleAdmin](https://www.eduardokraus.com/integrao-moodle-pagseguro). Também o MoodleAdmin traz uma interface muito mais simples e fácil para o aluno se inscrever.
 
+## Inscrição com Pagamento único
+
+![Inscrição com Pagamento único](https://github.com/EduardoKrausME/moodle-enrol-paymentpagseguro/blob/master/pix/print/Inscri%C3%A7%C3%A3o-01.png?raw=true)
+
+## Inscrição com Mensalidade
+
+![Inscrição com Mensalidade](https://github.com/EduardoKrausME/moodle-enrol-paymentpagseguro/blob/master/pix/print/Inscri%C3%A7%C3%A3o-01.png?raw=true)
+
 ## Tutoriais da Wiki
 
 * [Instalando o Enrol Payment Pagseguro](../Instalando-o-Plugin)
 * [Configurando o Plugin](../Configurando-o-Plugin)
+
