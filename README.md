@@ -1,5 +1,7 @@
 # Plugin enrol PagSeguro
 
+[![Build Status](https://travis-ci.org/EduardoKrausME/moodle-enrol-paymentpagseguro.svg?branch=master)](https://travis-ci.org/EduardoKrausME/moodle-enrol-paymentpagseguro)
+
 ## Porque este
 
 Este plugin foi desenvolvido com as técnicas mais atuais. Foi criado totalmente do ZERO sem adaptações ou edição de outro plugin. Foi criado pelo mesmo que criou o MoodleAdmin, O maior e mais completo sistema brasileiro de vendas de cursos. 
