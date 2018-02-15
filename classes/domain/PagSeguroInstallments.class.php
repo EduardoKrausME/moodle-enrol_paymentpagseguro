@@ -43,7 +43,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 class PagSeguroInstallments {
-    /*
+    /**
      * @var $installments
      */
     private $installments;

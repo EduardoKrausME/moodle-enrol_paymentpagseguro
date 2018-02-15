@@ -57,7 +57,7 @@ class PagSeguroAuthorizationPermissions {
         "CANCEL_TRANSACTIONS"
     );
 
-    /*
+    /**
      * @var $permissions
      */
     private $permissions;

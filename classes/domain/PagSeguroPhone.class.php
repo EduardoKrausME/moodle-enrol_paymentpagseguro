@@ -108,8 +108,6 @@ class PagSeguroPhone {
      * @return $this
      */
     public function setFullPhone($number) {
-        /** We clean the string that is coming. Can be formatted or not */
-
         $number = preg_replace("/[^0-9]/", '', $number);
         $number = $number[0] == 0 ? substr($number, 1) : $number;
 

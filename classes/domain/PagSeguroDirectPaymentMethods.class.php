@@ -54,7 +54,7 @@ class PagSeguroDirectPaymentMethods {
         "EFT" => "eft"
     );
 
-    /*
+    /**
      * @var $paymentMethod
      */
     private $paymentMethod;

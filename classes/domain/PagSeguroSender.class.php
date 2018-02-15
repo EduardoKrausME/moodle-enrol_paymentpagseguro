@@ -44,19 +44,29 @@ defined('MOODLE_INTERNAL') || die();
 
 class PagSeguroSender {
 
-    /** Sender name */
+    /**
+     * Sender name
+     */
     private $name;
 
-    /** Sender email */
+    /**
+     * Sender email
+     */
     private $email;
 
-    /** Sender phone */
+    /**
+     * Sender phone
+     */
     private $phone;
 
-    /** Sender documents */
+    /**
+     * Sender documents
+     */
     private $documents;
 
-    /** Sender IP */
+    /**
+     * Sender IP
+     */
     private $ip;
 
     /**
