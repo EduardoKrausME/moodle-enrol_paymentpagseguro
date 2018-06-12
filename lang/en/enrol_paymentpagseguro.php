@@ -71,5 +71,5 @@ $string['enrolstartdate_help'] = 'If enabled, users can only be enrolled as of t
 $string['enrolenddate'] = 'Application Deadline';
 $string['enrolenddate_help'] = 'If enabled, users can only subscribe by this date.';
 
-$string['defaultrole'] = 'Assign Paper';
+$string['defaultrole'] = 'Assign role';
 $string['defaultrole_help'] = 'Select the role that should be assigned to users during registrations paid via Pagseguro';
