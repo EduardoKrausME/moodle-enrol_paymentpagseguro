@@ -73,3 +73,14 @@ $string['enrolenddate_help'] = 'If enabled, users can only subscribe by this dat
 
 $string['defaultrole'] = 'Assign role';
 $string['defaultrole_help'] = 'Select the role that should be assigned to users during registrations paid via Pagseguro';
+
+$string['requestpayforpagseguro'] = 'This course requires payment of the registration fee before access.';
+$string['payforpagseguro'] = 'Pay now with PagSeguro';
+$string['paytext'] = 'Every day {$a->date} will be charged R$ {$a->costlocaled} for the course {$a->fullname}';
+
+$string['costunique'] = 'Cost: R$ {$a}';
+$string['costmonthly'] = 'Monthly cost: R$ {$a}';
+
+$string['errornoenrolment'] = 'No matrices found!';
+$string['errorlowvalue'] = 'Value is too low!';
+$string['errorapi']='API PagSeguro!';

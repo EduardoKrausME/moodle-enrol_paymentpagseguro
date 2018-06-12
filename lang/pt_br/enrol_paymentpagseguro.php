@@ -74,3 +74,13 @@ $string['enrolenddate_help'] = 'Se habilitado, os usuários só podem se inscrev
 $string['defaultrole'] = 'Atribuir papel';
 $string['defaultrole_help'] = 'Selecione o papel que deve ser atribuído aos usuários durante as inscrições pagas via Pagseguro';
 
+$string['requestpayforpagseguro'] = 'Este curso requer o pagamento da taxa de inscrição antes do acesso.';
+$string['payforpagseguro'] = 'Pagar agora com PagSeguro';
+$string['paytext'] = 'Todo dia {$a->date} será cobrado o valor de R${$a->costlocaled} referente ao curso {$a->fullname}';
+
+$string['costunique'] = 'Custo: R${$a}';
+$string['costmonthly'] = 'Custo mensal: R${$a}';
+
+$string['errornoenrolment'] = 'Nenhuma matrícula localizada!';
+$string['errorlowvalue']='Valor é muito baixo!';
+$string['errorapi']='API PagSeguro!';

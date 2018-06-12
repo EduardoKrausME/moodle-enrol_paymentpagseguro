@@ -37,10 +37,10 @@ if ($notification) {
     }
 }
 
-die('API de retorno do PagSeguro!');
+die(get_string('errorapi', 'enrol_paymentpagseguro'));
 
 /**
- * Processa os pagaments por mensalidades.
+ * Process payments for monthly payments.
  *
  * @throws coding_exception
  * @throws dml_exception
@@ -52,7 +52,7 @@ function proccess_preapproval() {
     $notificationcode = optional_param('notificationCode', false, PARAM_RAW);
 
     if (!$notificationcode) {
-        die('API de retorno do PagSeguro!');
+        die(get_string('errorapi', 'enrol_paymentpagseguro'));
     }
 
     try {
@@ -72,29 +72,29 @@ function proccess_preapproval() {
         $plugininstance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
         $plugininstance->enrolperiod = strtotime("+{$plugininstance->customint1} Month"); // Expira na quantidade de meses
 
-        /*
-         * Status:
-         * 1 - Aguardando pagamento: o comprador iniciou a transação, mas até o momento o PagSeguro não recebeu nenhuma informação sobre o pagamento.
-         * 2 - Em análise: o comprador optou por pagar com um cartão de crédito e o PagSeguro está analisando o risco da transação.
-         * 3 - Paga: a transação foi paga pelo comprador e o PagSeguro já recebeu uma confirmação da instituição financeira responsável pelo processamento.
-         * 4 - Disponível: a transação foi paga e chegou ao final de seu prazo de liberação sem ter sido retornada e sem que haja nenhuma disputa aberta.
-         * 5 - Em disputa: o comprador, dentro do prazo de liberação da transação, abriu uma disputa.
-         * 6 - Devolvida: o valor da transação foi devolvido para o comprador.
-         * 7 - Cancelada: a transação foi cancelada sem ter sido finalizada.
-         *
-         * 3 - libera a matrícula
-         * 6 - remove a matrícula
-         */
+         /*
+          * Status:
+          * 1 - Awaiting payment: the buyer started the transaction, but so far PagSeguro has not received any payment information.
+          * 2 - Under review: the buyer has chosen to pay with a credit card and PagSeguro is analyzing the risk of the transaction.
+          * 3 - Pay: the transaction was paid by the buyer and PagSeguro has already received a confirmation from the financial institution responsible for the processing.
+          * 4 - Available: The transaction has been paid and has reached the end of its release period without being returned and without any open dispute.
+          * 5 - In dispute: the buyer, within the term of release of the transaction, opened a dispute.
+          * 6 - Returned: The transaction amount was returned to the buyer.
+          * 7 - Canceled: the transaction was canceled without being finalized.
+          *
+          * 3 - releases registration.
+          * 6 - remove the license plate.
+          */
         if ($response->getStatus()->getValue() == 3) {
-            add_matricula($plugininstance, $paymentpagseguro);
+            add_enrollment($plugininstance, $paymentpagseguro);
         } else if ($response->getStatus()->getValue() == 6) {
-            remove_matricula($plugininstance, $paymentpagseguro);
+            remove_enrollment($plugininstance, $paymentpagseguro);
         }
     }
 }
 
 /**
- * Processa os pagamento únicos.
+ * Processes single payments.
  *
  * @throws coding_exception
  * @throws dml_exception
@@ -106,7 +106,7 @@ function proccess_transaction() {
     $notificationcode = optional_param('notificationCode', false, PARAM_RAW);
 
     if (!$notificationcode) {
-        die('API de retorno do PagSeguro!');
+        die(get_string('errorapi', 'enrol_paymentpagseguro'));
     }
 
     try {
@@ -126,21 +126,21 @@ function proccess_transaction() {
         $plugininstance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
 
         if ($response->getStatus()->getValue() == 3) {
-            add_matricula($plugininstance, $paymentpagseguro);
+            add_enrollment($plugininstance, $paymentpagseguro);
         } else if ($response->getStatus()->getValue() == 6) {
-            remove_matricula($plugininstance, $paymentpagseguro);
+            remove_enrollment($plugininstance, $paymentpagseguro);
         }
     }
 }
 
 /**
- * Add a Matrícula
+ * Add to Cart
  *
  * @param $plugininstance
  * @param $paymentpagseguro
  * @throws coding_exception
  */
-function add_matricula($plugininstance, $paymentpagseguro) {
+function add_enrollment($plugininstance, $paymentpagseguro) {
 
     if ($plugininstance->enrolperiod) {
         $timeend = time() + $plugininstance->enrolperiod;
@@ -160,7 +160,7 @@ function add_matricula($plugininstance, $paymentpagseguro) {
  * @param $paymentpagseguro
  * @throws coding_exception
  */
-function remove_matricula($plugininstance, $paymentpagseguro) {
+function remove_enrollment($plugininstance, $paymentpagseguro) {
     if ($plugininstance->customint2) {
         $plugin = enrol_get_plugin('paymentpagseguro');
         $plugin->enrol_user($plugininstance, $paymentpagseguro->userid,

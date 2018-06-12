@@ -34,7 +34,7 @@ if (!$course = $DB->get_record("course", array("id" => $id))) {
 $enrol = $DB->get_record('enrol', array('courseid' => $course->id, 'enrol' => 'paymentpagseguro'));
 
 if (!$enrol) {
-    print_error('Nenhuma matrícula localizada!');
+    print_error(get_string('errornoenrolment', 'enrol_paymentpagseguro'));
 }
 
 $context = context_course::instance($course->id, MUST_EXIST);
@@ -50,7 +50,7 @@ $cost = format_float($enrol->cost, 2, false);
 $costlocaled = format_float($enrol->cost, 2, true);
 
 if ($cost < 0.1) {
-    print_error('Valor é muito baixo!');
+    print_error(get_string('errorlowvalue', 'enrol_paymentpagseguro'));
 }
 
 $paymentpagseguro = new stdClass();
@@ -77,7 +77,6 @@ if ($enrol->customint1 < 3) {
         $credentials = PagSeguroConfig::getAccountCredentials();
         $checkouturl = $paymentrequest->register($credentials);
 
-
     } catch (Exception $e) {
         print_error($e->getMessage());
     }
@@ -93,7 +92,12 @@ if ($enrol->customint1 < 3) {
     $paymentpreapproval = new PagSeguroPreApprovalRequest();
     $paymentpreapproval->addItem($course->id, $fullname, 1, $cost);
     $paymentpreapproval->setPreApprovalName(
-        "Todo dia " . date('d') . " será cobrado o valor de R\${$costlocaled} referente ao curso {$fullname}");
+        get_string('paytext', 'enrol_paymentpagseguro',
+            array('date' => date('d'),
+                'costlocaled' => $costlocaled,
+                'fullname' => $fullname
+            ))
+    );
 
     $paymentpreapproval->setSender(fullname($USER), $USER->email);
     $paymentpreapproval->setPreApprovalPeriod('Monthly');

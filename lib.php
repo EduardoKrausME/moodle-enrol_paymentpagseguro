@@ -166,23 +166,23 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
                 $localisedcost = format_float($cost, 2, true);
 
                 if ($instance->customint1 < 3) {
-                    $custo = "Custo: R\${$localisedcost}";
+                    $charge = get_string ('costunique', 'enrol_paymentpagseguro', $localisedcost);
                 } else {
-                    $custo = "Custo mensal: R\${$localisedcost}";
+                    $charge = get_string ('costmonthly', 'enrol_paymentpagseguro', $localisedcost);
                 }
 
                 echo "
                     <div align=\"center\">
-                        <p>Este curso requer o pagamento da taxa de inscrição antes do acesso.</p>
+                        <p>".get_string ('requestpayforpagseguro', 'enrol_paymentpagseguro')."</p>
                         <p><strong>{$instancename}</strong></p>
-                        <p><strong>{$custo}</strong></p>
+                        <p><strong>{$charge}</strong></p>
                         <p><img width=\"300\" alt=\"pagseguro\"
                                 src=\"{$CFG->wwwroot}/enrol/paymentpagseguro/pix/paymentpagseguro-logo.png\"/></p>
                         <p>&nbsp;</p>
                         <p><a href=\"{$CFG->wwwroot}/enrol/paymentpagseguro/pagar.php?id={$instance->courseid}\"
                               style=\"border-radius:15px;box-shadow:0 1px 3px #666666;color:#ffffff;font-size:20px;
                                       background:#4DB082;padding:10px 20px;text-decoration:none;\">
-                                  Pagar agora com PagSeguro</a></p>
+                                  ".get_string ('payforpagseguro', 'enrol_paymentpagseguro')."</a></p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                     </div>";
