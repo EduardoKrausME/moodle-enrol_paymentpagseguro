@@ -23,7 +23,7 @@
  */
 
 require("../../config.php");
-require(dirname(__FILE__) . '/classes/PagSeguroLibrary.php');
+require(dirname(__FILE__) . '/vendor/pagseguro/PagSeguroLibrary.php');
 
 admin_externalpage_setup('returpaymentpagseguro');
 

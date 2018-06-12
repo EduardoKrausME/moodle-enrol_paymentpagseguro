@@ -44,7 +44,7 @@ require_login();
 
 $fullname = format_string($course->fullname, true, array('context' => $context));
 
-require(dirname(__FILE__) . '/classes/PagSeguroLibrary.php');
+require(dirname(__FILE__) . '/vendor/pagseguro/PagSeguroLibrary.php');
 
 $cost = format_float($enrol->cost, 2, false);
 $costlocaled = format_float($enrol->cost, 2, true);
