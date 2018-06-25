@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 require('../../config.php');
 require_once('edit_form.php');
 
@@ -73,8 +75,8 @@ if ($mform->is_cancelled()) {
     $instance->enrolenddate = $data->enrolenddate;
     $instance->enrolperiod = $data->enrolperiod;
     $instance->timemodified = time();
-    $instance->customint1 = $data->customint1; // Meses
-    $instance->customint2 = $data->customint2; // faulback
+    $instance->customint1 = $data->customint1; // Meses.
+    $instance->customint2 = $data->customint2; // Faulback.
 
     if ($instance->id) {
         $reset = ($instance->status != $data->status);

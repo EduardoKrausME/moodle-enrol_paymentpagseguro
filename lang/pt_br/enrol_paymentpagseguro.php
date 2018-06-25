@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $string['pluginname'] = 'Inscrição com pagamento pelo Pagseguro';
 $string['pluginname_desc'] = 'Libera curso mediante pagamento via Pagseguro!';
 
@@ -82,5 +84,5 @@ $string['costunique'] = 'Custo: R${$a}';
 $string['costmonthly'] = 'Custo mensal: R${$a}';
 
 $string['errornoenrolment'] = 'Nenhuma matrícula localizada!';
-$string['errorlowvalue']='Valor é muito baixo!';
-$string['errorapi']='API PagSeguro!';
+$string['errorlowvalue'] = 'Valor é muito baixo!';
+$string['errorapi'] = 'API PagSeguro!';

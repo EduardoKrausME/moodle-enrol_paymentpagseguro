@@ -23,6 +23,7 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
+
 /**
  * Sets up installation script.
  * @return void

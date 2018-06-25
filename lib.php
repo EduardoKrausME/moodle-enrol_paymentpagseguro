@@ -166,14 +166,14 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
                 $localisedcost = format_float($cost, 2, true);
 
                 if ($instance->customint1 < 3) {
-                    $charge = get_string ('costunique', 'enrol_paymentpagseguro', $localisedcost);
+                    $charge = get_string('costunique', 'enrol_paymentpagseguro', $localisedcost);
                 } else {
-                    $charge = get_string ('costmonthly', 'enrol_paymentpagseguro', $localisedcost);
+                    $charge = get_string('costmonthly', 'enrol_paymentpagseguro', $localisedcost);
                 }
 
                 echo "
                     <div align=\"center\">
-                        <p>".get_string ('requestpayforpagseguro', 'enrol_paymentpagseguro')."</p>
+                        <p>" . get_string('requestpayforpagseguro', 'enrol_paymentpagseguro') . "</p>
                         <p><strong>{$instancename}</strong></p>
                         <p><strong>{$charge}</strong></p>
                         <p><img width=\"300\" alt=\"pagseguro\"
@@ -182,7 +182,7 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
                         <p><a href=\"{$CFG->wwwroot}/enrol/paymentpagseguro/pagar.php?id={$instance->courseid}\"
                               style=\"border-radius:15px;box-shadow:0 1px 3px #666666;color:#ffffff;font-size:20px;
                                       background:#4DB082;padding:10px 20px;text-decoration:none;\">
-                                  ".get_string ('payforpagseguro', 'enrol_paymentpagseguro')."</a></p>
+                                  " . get_string('payforpagseguro', 'enrol_paymentpagseguro') . "</a></p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                     </div>";

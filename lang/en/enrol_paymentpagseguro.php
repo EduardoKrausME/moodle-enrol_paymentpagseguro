@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $string['pluginname'] = 'Subscription with payment by Pagseguro';
 $string['pluginname_desc'] = 'Free course for payment via Pagseguro!';
 
@@ -83,4 +85,4 @@ $string['costmonthly'] = 'Monthly cost: R$ {$a}';
 
 $string['errornoenrolment'] = 'No matrices found!';
 $string['errorlowvalue'] = 'Value is too low!';
-$string['errorapi']='API PagSeguro!';
+$string['errorapi'] = 'API PagSeguro!';

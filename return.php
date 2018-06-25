@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 require("../../config.php");
 require(dirname(__FILE__) . '/vendor/pagseguro/PagSeguroLibrary.php');
 
@@ -70,21 +72,22 @@ function proccess_preapproval() {
     if ($paymentpagseguro) {
 
         $plugininstance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
-        $plugininstance->enrolperiod = strtotime("+{$plugininstance->customint1} Month"); // Expira na quantidade de meses
+        // Expira na quantidade de meses.
+        $plugininstance->enrolperiod = strtotime("+{$plugininstance->customint1} Month");
 
-         /*
-          * Status:
-          * 1 - Awaiting payment: the buyer started the transaction, but so far PagSeguro has not received any payment information.
-          * 2 - Under review: the buyer has chosen to pay with a credit card and PagSeguro is analyzing the risk of the transaction.
-          * 3 - Pay: the transaction was paid by the buyer and PagSeguro has already received a confirmation from the financial institution responsible for the processing.
-          * 4 - Available: The transaction has been paid and has reached the end of its release period without being returned and without any open dispute.
-          * 5 - In dispute: the buyer, within the term of release of the transaction, opened a dispute.
-          * 6 - Returned: The transaction amount was returned to the buyer.
-          * 7 - Canceled: the transaction was canceled without being finalized.
-          *
-          * 3 - releases registration.
-          * 6 - remove the license plate.
-          */
+        // Status:
+        // 1 - Awaiting payment: the buyer started the transaction, but so far PagSeguro has not received any payment information.
+        // 2 - Under review: the buyer has chosen to pay with a credit card and PagSeguro is analyzing the risk of the transaction.
+        // 3 - Pay: the transaction was paid by the buyer and PagSeguro has already received a confirmation from the financial
+        // institution responsible for the processing.
+        // 4 - Available: The transaction has been paid and has reached the end of its release period without being returned
+        // and without any open dispute.
+        // 5 - In dispute: the buyer, within the term of release of the transaction, opened a dispute.
+        // 6 - Returned: The transaction amount was returned to the buyer.
+        // 7 - Canceled: the transaction was canceled without being finalized.
+        // Actions:
+        // 3 - releases registration.
+        // 6 - remove the license plate.
         if ($response->getStatus()->getValue() == 3) {
             add_enrollment($plugininstance, $paymentpagseguro);
         } else if ($response->getStatus()->getValue() == 6) {
