@@ -22,12 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 require("../../config.php");
+require_once($CFG->libdir . '/adminlib.php');
 require(dirname(__FILE__) . '/vendor/pagseguro/PagSeguroLibrary.php');
 
-admin_externalpage_setup('returpaymentpagseguro');
+$pageurl = new moodle_url('/enrol/paymentpagseguro/return.php');
+$PAGE->set_url($pageurl);
 
 $notification = optional_param('notificationType', false, PARAM_RAW);
 

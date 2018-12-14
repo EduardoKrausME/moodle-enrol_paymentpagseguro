@@ -65,6 +65,12 @@ class enrol_paymentpagseguro_edit_form extends moodleform {
             $mform->setType('cost', PARAM_RAW);
             $mform->setDefault('cost', '0,00');
             $mform->addHelpButton('cost', 'cost2', 'enrol_paymentpagseguro');
+
+            $mform->addElement('hidden', 'customint1');
+            $mform->setDefault('customint1', 0);
+
+            $mform->addElement('hidden', 'customint2');
+            $mform->setDefault('customint2', 1);
         }
 
         if ($instance->id) {

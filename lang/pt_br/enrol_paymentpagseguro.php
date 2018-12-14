@@ -35,6 +35,8 @@ $string['unenrolselfconfirm'] = 'Você realmente deseja se desinstalar do curso 
 
 $string['urlretorno'] = 'A URL de retorno é <code>{$a}</code>!';
 
+$string['nocost'] = "<span style='color: #ff0404'>Nenhum preço não definido pelo administrador!</span>";
+
 $string['email'] = 'Email do PagSeguro';
 $string['email_desc'] = 'Email do PagSeguro';
 
@@ -44,7 +46,7 @@ $string['token_desc'] = 'Token do PagSeguro';
 $string['subscriptions'] = 'Habilitar assinaturas no formulário';
 $string['subscriptions_desc'] = 'Se marcado, na inscrição habilita a opção de assinaturas.';
 
-$string['status'] = 'Habilitar assinaturas?';
+$string['status'] = 'Habilitado?';
 
 $string['expiredaction'] = 'Ação ao expirar a matrícula';
 $string['expiredaction_help'] = 'Qual ação tomar ao expirar a matrícula?';

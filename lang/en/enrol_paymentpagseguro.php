@@ -35,6 +35,8 @@ $string['unenrolselfconfirm'] = 'Do you really want to uninstall from the course
 
 $string['urlretorno'] = 'The return URL is <code>{$a}</code>!';
 
+$string['nocost'] = "<span style='color: #ff0404'>Nenhum preço definido pelo administrador!</span>";
+
 $string['email'] = 'PagSeguro Email';
 $string['email_desc'] = 'PagSeguro Email';
 
