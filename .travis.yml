@@ -31,7 +31,7 @@ install:
   - moodle-plugin-ci install
 
 ignore:
-  - classes/*
+  - vendor/*
 
 script:
   - moodle-plugin-ci phplint
