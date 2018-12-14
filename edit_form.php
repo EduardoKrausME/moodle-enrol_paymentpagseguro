@@ -48,12 +48,12 @@ class enrol_paymentpagseguro_edit_form extends moodleform {
 
         if ($plugin->get_config('subscriptions')) {
             $mform->addElement('text', 'cost', get_string('cost', 'enrol_paymentpagseguro'), array('size' => 4));
-            $mform->setType('cost', PARAM_RAW);
+            $mform->setType('cost', PARAM_TEXT);
             $mform->setDefault('cost', '0,00');
             $mform->addHelpButton('cost', 'cost', 'enrol_paymentpagseguro');
 
             $mform->addElement('text', 'customint1', get_string('months', 'enrol_paymentpagseguro'), array('size' => 4));
-            $mform->setType('customint1', PARAM_RAW);
+            $mform->setType('customint1', PARAM_INT);
             $mform->setDefault('customint1', 3);
             $mform->addHelpButton('customint1', 'months', 'enrol_paymentpagseguro');
 
@@ -62,7 +62,7 @@ class enrol_paymentpagseguro_edit_form extends moodleform {
             $mform->addHelpButton('customint2', 'faulback', 'enrol_paymentpagseguro');
         } else {
             $mform->addElement('text', 'cost', get_string('cost2', 'enrol_paymentpagseguro'), array('size' => 4));
-            $mform->setType('cost', PARAM_RAW);
+            $mform->setType('cost', PARAM_INT);
             $mform->setDefault('cost', '0,00');
             $mform->addHelpButton('cost', 'cost2', 'enrol_paymentpagseguro');
 
