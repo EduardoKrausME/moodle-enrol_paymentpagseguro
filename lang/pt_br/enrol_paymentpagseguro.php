@@ -88,3 +88,5 @@ $string['costmonthly'] = 'Custo mensal: R${$a}';
 $string['errornoenrolment'] = 'Nenhuma matrícula localizada!';
 $string['errorlowvalue'] = 'Valor é muito baixo!';
 $string['errorapi'] = 'API PagSeguro!';
+
+$string['privacy:metadata'] = 'Plugin compartilha dados com o PagSeguro';

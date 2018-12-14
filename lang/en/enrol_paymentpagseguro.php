@@ -88,3 +88,5 @@ $string['costmonthly'] = 'Monthly cost: R$ {$a}';
 $string['errornoenrolment'] = 'No matrices found!';
 $string['errorlowvalue'] = 'Value is too low!';
 $string['errorapi'] = 'API PagSeguro!';
+
+$string['privacy:metadata'] = 'Plugin compartilha dados com o PagSeguro';

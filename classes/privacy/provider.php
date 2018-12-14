@@ -15,17 +15,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version file.
+ * Provider Class.
  *
- * @package    enrol_paymentpagseguro
- * @copyright  2018 Eduardo Kraus
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   enrol_paymentpagseguro
+ * @copyright 2018 Eduardo Kraus  {@link http://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+namespace enrol_paymentpagseguro\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2018121400;
-$plugin->requires = 2011120500;
-$plugin->component = 'enrol_paymentpagseguro';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.3.1';
+/**
+ * Class provider.
+ *
+ * @copyright 2018 Eduardo Kraus  {@link http://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get reason.
+     *
+     * @return string
+     */
+    public static function get_reason() {
+        return 'privacy:metadata';
+    }
+}
