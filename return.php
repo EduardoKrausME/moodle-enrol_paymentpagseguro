@@ -22,151 +22,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require("../../config.php");
-require_once($CFG->libdir . '/adminlib.php');
-require(dirname(__FILE__) . '/vendor/pagseguro/PagSeguroLibrary.php');
+require_once("../../config.php");
+require_once("{$CFG->libdir}/adminlib.php");
 
 $pageurl = new moodle_url('/enrol/paymentpagseguro/return.php');
 $PAGE->set_url($pageurl);
 
-$notification = optional_param('notificationType', false, PARAM_RAW);
+$notificationtype = optional_param('notificationType', false, PARAM_RAW);
 
-if ($notification) {
-    if ($notification == 'transaction') {
-        proccess_transaction();
-    } else if ($notification == 'preApproval') {
-        proccess_preapproval();
-    }
+if ($notificationtype) {
+    require_once("{$CFG->dirroot}/enrol/paymentpagseguro/classes/payment/notification.php");
+
+    $notification = new \enrol_paymentpagseguro\payment\notification();
+    $notification->proccess($notificationtype);
 }
 
 die(get_string('errorapi', 'enrol_paymentpagseguro'));
-
-/**
- * Process payments for monthly payments.
- *
- * @throws coding_exception
- * @throws dml_exception
- */
-function proccess_preapproval() {
-
-    global $DB;
-
-    $notificationcode = optional_param('notificationCode', false, PARAM_RAW);
-
-    if (!$notificationcode) {
-        die(get_string('errorapi', 'enrol_paymentpagseguro'));
-    }
-
-    try {
-        $response = PagSeguroNotificationService::checkPreApproval(
-            PagSeguroConfig::getAccountCredentials(),
-            $notificationcode
-        );
-    } catch (Exception $e) {
-        die($e->getMessage());
-    }
-
-    $paymentpagseguroid = str_replace("REF", "", $response->getReference());
-
-    $paymentpagseguro = $DB->get_record('enrol_paymentpagseguro', array('id' => $paymentpagseguroid));
-    if ($paymentpagseguro) {
-
-        $plugininstance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
-        // Expira na quantidade de meses.
-        $plugininstance->enrolperiod = strtotime("+{$plugininstance->customint1} Month");
-
-        // Status:
-        // 1 - Awaiting payment: the buyer started the transaction, but so far PagSeguro has not received any payment information.
-        // 2 - Under review: the buyer has chosen to pay with a credit card and PagSeguro is analyzing the risk of the transaction.
-        // 3 - Pay: the transaction was paid by the buyer and PagSeguro has already received a confirmation from the financial
-        // institution responsible for the processing.
-        // 4 - Available: The transaction has been paid and has reached the end of its release period without being returned
-        // and without any open dispute.
-        // 5 - In dispute: the buyer, within the term of release of the transaction, opened a dispute.
-        // 6 - Returned: The transaction amount was returned to the buyer.
-        // 7 - Canceled: the transaction was canceled without being finalized.
-        // Actions:
-        // 3 - releases registration.
-        // 6 - remove the license plate.
-        if ($response->getStatus()->getValue() == 3) {
-            add_enrollment($plugininstance, $paymentpagseguro);
-        } else if ($response->getStatus()->getValue() == 6) {
-            remove_enrollment($plugininstance, $paymentpagseguro);
-        }
-    }
-}
-
-/**
- * Processes single payments.
- *
- * @throws coding_exception
- * @throws dml_exception
- */
-function proccess_transaction() {
-
-    global $DB;
-
-    $notificationcode = optional_param('notificationCode', false, PARAM_RAW);
-
-    if (!$notificationcode) {
-        die(get_string('errorapi', 'enrol_paymentpagseguro'));
-    }
-
-    try {
-        $response = PagSeguroNotificationService::checkTransaction(
-            PagSeguroConfig::getAccountCredentials(),
-            $notificationcode
-        );
-    } catch (Exception $e) {
-        die($e->getMessage());
-    }
-
-    $paymentpagseguroid = str_replace("REF", "", $response->getReference());
-
-    $paymentpagseguro = $DB->get_record('enrol_paymentpagseguro', array('id' => $paymentpagseguroid));
-    if ($paymentpagseguro) {
-
-        $plugininstance = $DB->get_record("enrol", array("id" => $paymentpagseguro->instanceid, "status" => 0));
-
-        if ($response->getStatus()->getValue() == 3) {
-            add_enrollment($plugininstance, $paymentpagseguro);
-        } else if ($response->getStatus()->getValue() == 6) {
-            remove_enrollment($plugininstance, $paymentpagseguro);
-        }
-    }
-}
-
-/**
- * Add to Cart
- *
- * @param $plugininstance
- * @param $paymentpagseguro
- * @throws coding_exception
- */
-function add_enrollment($plugininstance, $paymentpagseguro) {
-
-    if ($plugininstance->enrolperiod) {
-        $timeend = time() + $plugininstance->enrolperiod;
-    } else {
-        $timeend = 0;
-    }
-
-    $plugin = enrol_get_plugin('paymentpagseguro');
-    $plugin->enrol_user($plugininstance, $paymentpagseguro->userid,
-        $plugininstance->roleid, time(), $timeend, ENROL_USER_ACTIVE);
-}
-
-/**
- * Remove a Matrícula
- *
- * @param $plugininstance
- * @param $paymentpagseguro
- * @throws coding_exception
- */
-function remove_enrollment($plugininstance, $paymentpagseguro) {
-    if ($plugininstance->customint2) {
-        $plugin = enrol_get_plugin('paymentpagseguro');
-        $plugin->enrol_user($plugininstance, $paymentpagseguro->userid,
-            $plugininstance->roleid, time(), 0, ENROL_USER_SUSPENDED);
-    }
-}
