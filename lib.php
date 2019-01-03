@@ -165,10 +165,12 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
                 $instancename = $this->get_instance_name($instance);
                 $localisedcost = format_float($cost, 2, true);
 
-                if ($instance->customint1 < 3) {
-                    $charge = get_string('costunique', 'enrol_paymentpagseguro', $localisedcost);
-                } else {
+                if ($instance->customint1 >= 3 && get_config('enrol_paymentpagseguro', 'subscriptions')) {
                     $charge = get_string('costmonthly', 'enrol_paymentpagseguro', $localisedcost);
+                    $langbutton = get_string('signforpagseguro', 'enrol_paymentpagseguro');
+                } else {
+                    $charge = get_string('costunique', 'enrol_paymentpagseguro', $localisedcost);
+                    $langbutton = get_string('payforpagseguro', 'enrol_paymentpagseguro');
                 }
 
                 echo "
@@ -181,8 +183,7 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
                         <p>&nbsp;</p>
                         <p><a href=\"{$CFG->wwwroot}/enrol/paymentpagseguro/pagar.php?id={$instance->courseid}\"
                               style=\"border-radius:15px;box-shadow:0 1px 3px #666666;color:#ffffff;font-size:20px;
-                                      background:#4DB082;padding:10px 20px;text-decoration:none;\">
-                                  " . get_string('payforpagseguro', 'enrol_paymentpagseguro') . "</a></p>
+                                      background:#4DB082;padding:10px 20px;text-decoration:none;\">{$langbutton}</a></p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                     </div>";
