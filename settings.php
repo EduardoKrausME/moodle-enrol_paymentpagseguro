@@ -29,9 +29,6 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('enrol_paymentpagseguro_settings', '',
         get_string('pluginname_desc', 'enrol_paymentpagseguro')));
 
-    $settings->add(new admin_setting_heading('enrol_paymentpagseguro_retorno', '',
-        get_string('urlretorno', 'enrol_paymentpagseguro', "{$CFG->wwwroot}/enrol/paymentpagseguro/return.php")));
-
     $settings->add(new admin_setting_configtext('enrol_paymentpagseguro/email',
         get_string('email', 'enrol_paymentpagseguro'),
         get_string('email_desc', 'enrol_paymentpagseguro')
