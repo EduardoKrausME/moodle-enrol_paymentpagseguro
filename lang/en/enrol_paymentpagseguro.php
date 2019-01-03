@@ -33,7 +33,9 @@ $string['paymentpagseguro:unenrol'] = 'Disenroll course users';
 $string['paymentpagseguro:unenrolself'] = 'Remove me from course';
 $string['unenrolselfconfirm'] = 'Do you really want to uninstall from the course "{$ a}"?';
 
-$string['urlretorno'] = 'The return URL is <code>{$a}</code>!';
+$string['paymentredirect'] = '<h2>Creating payment requisition</h2>
+    <p>Payment URL: <strong>{$a}</strong></p>
+    <p><a title=\"Payment URL\" href=\"{$a}\" target=\_blank\">Go to the payment URL.</a></p>';
 
 $string['nocost'] = "<span style='color: #ff0404'>Nenhum preço definido pelo administrador!</span>";
 
@@ -80,6 +82,7 @@ $string['defaultrole_help'] = 'Select the role that should be assigned to users 
 
 $string['requestpayforpagseguro'] = 'This course requires payment of the registration fee before access.';
 $string['payforpagseguro'] = 'Pay now with PagSeguro';
+$string['signforpagseguro'] = 'Sign now with PagSeguro';
 $string['paytext'] = 'Every day {$a->date} will be charged R$ {$a->costlocaled} for the course {$a->fullname}';
 
 $string['costunique'] = 'Cost: R$ {$a}';
