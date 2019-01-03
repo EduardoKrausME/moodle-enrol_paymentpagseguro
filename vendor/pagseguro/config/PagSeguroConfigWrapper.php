@@ -53,6 +53,7 @@ class PagSeguroConfigWrapper {
 
     /**
      * @return array
+     * @throws dml_exception
      */
     private static function getCredentials() {
         $PagSeguroConfig = array();
