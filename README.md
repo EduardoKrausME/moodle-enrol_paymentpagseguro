@@ -1,6 +1,6 @@
 # Plugin enrol PagSeguro
 
-[![Build Status](https://travis-ci.org/EduardoKrausME/moodle-enrol-paymentpagseguro.svg?branch=master)](https://travis-ci.org/EduardoKrausME/moodle-enrol-paymentpagseguro)
+[![Build Status](https://travis-ci.org/EduardoKrausME/moodle-enrol_paymentpagseguro.svg?branch=master)](https://travis-ci.org/EduardoKrausME/moodle-enrol_paymentpagseguro)
 
 ## Porque este
 
@@ -12,14 +12,14 @@ Venda pacotes de cursos, cupons de desconto, Histórico de transações e Sistem
 
 ## Inscrição com Pagamento único
 
-![Inscrição com Pagamento único](https://github.com/EduardoKrausME/moodle-enrol-paymentpagseguro/blob/master/pix/print/Inscri%C3%A7%C3%A3o-01.png?raw=true)
+![Inscrição com Pagamento único](https://github.com/EduardoKrausME/moodle-enrol_paymentpagseguro/blob/master/pix/print/Inscri%C3%A7%C3%A3o-01.png?raw=true)
 
 ## Inscrição com Mensalidade
 
-![Inscrição com Mensalidade](https://github.com/EduardoKrausME/moodle-enrol-paymentpagseguro/blob/master/pix/print/Inscri%C3%A7%C3%A3o-01.png?raw=true)
+![Inscrição com Mensalidade](https://github.com/EduardoKrausME/moodle-enrol_paymentpagseguro/blob/master/pix/print/Inscri%C3%A7%C3%A3o-01.png?raw=true)
 
 ## Tutoriais da Wiki
 
-* [Instalando o Enrol Payment Pagseguro](https://github.com/EduardoKrausME/moodle-enrol-paymentpagseguro/wiki/Instalando-o-Plugin)
-* [Configurando o Plugin](https://github.com/EduardoKrausME/moodle-enrol-paymentpagseguro/wiki/Configurando-o-Plugin)
+* [Instalando o Enrol Payment Pagseguro](https://github.com/EduardoKrausME/moodle-enrol_paymentpagseguro/wiki/Instalando-o-Plugin)
+* [Configurando o Plugin](https://github.com/EduardoKrausME/moodle-enrol_paymentpagseguro/wiki/Configurando-o-Plugin)
 
