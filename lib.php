@@ -33,6 +33,7 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
     /**
      * @param array $instances
      * @return array
+     * @throws coding_exception
      */
     public function get_info_icons(array $instances) {
         return array(new pix_icon('icon', get_string('pluginname', 'enrol_paymentpagseguro'), 'enrol_paymentpagseguro'));
@@ -74,6 +75,7 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
      * @param navigation_node $instancesnode
      * @param stdClass $instance
      * @throws coding_exception
+     * @throws moodle_exception
      */
     public function add_course_navigation($instancesnode, stdClass $instance) {
         if ($instance->enrol !== 'paymentpagseguro') {
@@ -92,6 +94,7 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
      * @param stdClass $instance
      * @return array
      * @throws coding_exception
+     * @throws moodle_exception
      */
     public function get_action_icons(stdClass $instance) {
         global $OUTPUT;
@@ -117,6 +120,7 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
      * @param int $courseid
      * @return moodle_url|null
      * @throws coding_exception
+     * @throws moodle_exception
      */
     public function get_newinstance_link($courseid) {
         $context = context_course::instance($courseid, MUST_EXIST);
@@ -230,6 +234,7 @@ class enrol_paymentpagseguro_plugin extends enrol_plugin {
      * @param stdClass $ue
      * @return array
      * @throws coding_exception
+     * @throws moodle_exception
      */
     public function get_user_enrolment_actions(course_enrolment_manager $manager, $ue) {
         $actions = array();
